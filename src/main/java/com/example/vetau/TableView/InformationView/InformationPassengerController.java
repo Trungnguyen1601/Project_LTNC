@@ -247,7 +247,7 @@ public class InformationPassengerController implements Initializable {
     void Switch_train_form(MouseEvent event) throws IOException {
         stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-        String FXMLPATH_quanlychuyentau = "/DashBroard/dashbroard.fxml";
+        String FXMLPATH_quanlychuyentau = "/DashBroard/dashboard.fxml";
         try {
             Show_Window showWindow = new Show_Window();
             showWindow.Show(FXMLPATH_quanlychuyentau);

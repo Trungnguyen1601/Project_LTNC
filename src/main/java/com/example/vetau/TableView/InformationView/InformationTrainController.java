@@ -1,6 +1,6 @@
 package com.example.vetau.TableView.InformationView;
 
-import com.example.vetau.TableView.DashBroardController;
+import com.example.vetau.TableView.DashBoardController;
 import com.example.vetau.helpers.Database;
 import com.example.vetau.models.Ga_tau;
 import com.example.vetau.models.Tau;
@@ -133,7 +133,7 @@ public class InformationTrainController implements Initializable {
     @FXML
     void setOK(MouseEvent event1) {
         Combobox_tau_edit();
-        Train_id_edit = DashBroardController.getTrain_id();
+        Train_id_edit = DashBoardController.getTrain_id();
         if(gadi_edit_combo.getValue() != null)
         {
             chuyentau.setGadi(gadi_edit_combo.getValue());
@@ -252,7 +252,7 @@ public class InformationTrainController implements Initializable {
         Combobox_gadi_edit();
         Combobox_gaden_edit();
         Combobox_tau_edit();
-        String Train_ID_infor = DashBroardController.getTrain_id();
+        String Train_ID_infor = DashBoardController.getTrain_id();
         query = "SELECT c.ID_Chuyentau,\n" +
                 "      g1.Ten_Gatau AS TenGaDi,g1.Dia_diem as DiaDiem_gadi,\n" +
                 "      g2.Ten_Gatau AS TenGaDen,g2.Dia_diem as DiaDiem_gaden,\n" +
@@ -283,7 +283,7 @@ public class InformationTrainController implements Initializable {
 
     public void Get_Edit_Train()
     {
-        String Train_id_edit = DashBroardController.getTrain_id();
+        String Train_id_edit = DashBoardController.getTrain_id();
         connection = Database.connectionDB();
         query = "SELECT c.ID_Chuyentau,\n" +
                 "     g1.ID_Gatau as ID_GaDi, g1.Ten_Gatau AS TenGaDi,g1.Dia_diem as DiaDiem_gadi,\n" +
