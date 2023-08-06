@@ -1,6 +1,6 @@
 package com.example.vetau.TableView.InformationView;
 
-import com.example.vetau.TableView.DashBoardController;
+import com.example.vetau.TableView.Quanlychuyentau.DashBoardController;
 import com.example.vetau.helpers.Database;
 import com.example.vetau.models.Ga_tau;
 import com.example.vetau.models.Tau;
