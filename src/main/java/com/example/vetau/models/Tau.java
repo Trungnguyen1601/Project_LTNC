@@ -3,23 +3,6 @@ package com.example.vetau.models;
 public class Tau {
     private String IDTau;
     private int Soluongtoa;
-
-    public Tau(String IDTau, int soluongtoa, String trangthai) {
-        this.IDTau = IDTau;
-        Soluongtoa = soluongtoa;
-        Trangthai = trangthai;
-    }
-
-    private String Trangthai;
-
-    public String getTrangthai() {
-        return Trangthai;
-    }
-
-    public void setTrangthai(String trangthai) {
-        Trangthai = trangthai;
-    }
-
     public Tau()
     {
 

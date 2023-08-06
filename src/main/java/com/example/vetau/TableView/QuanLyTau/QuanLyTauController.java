@@ -1,11 +1,15 @@
 package com.example.vetau.TableView.QuanLyTau;
 
+import com.example.vetau.Show.Button_Extend;
 import com.example.vetau.Show.Show_Window;
 import com.example.vetau.helpers.Database;
 import com.example.vetau.models.ChitietTau;
+import com.example.vetau.models.Passenger;
 import com.example.vetau.models.Tau;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,10 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,22 +28,29 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class QuanLyTauController implements Initializable {
-
+    @FXML
+    private TextField search_tau_txt;
 
     @FXML
-    private TableColumn<ChitietTau, String> ID_Tau_ct_col;
+    private TableColumn<ChitietTau, Button> Delete_col;
+
+    @FXML
+    private TableColumn<ChitietTau, Button> Detail_col;
+
+    @FXML
+    private TableColumn<ChitietTau, String> ID_Tau_col;
 
     @FXML
     private ComboBox<String> Loaitoa_id_combobox;
 
     @FXML
-    private TableColumn<ChitietTau,Integer> Soluongghe_ct_col;
+    private TableColumn<ChitietTau,Integer> Soluongghe_col;
 
     @FXML
     private TextField Soluongtoa_id;
 
     @FXML
-    private TableView<ChitietTau> chitietTauTableView;
+    private TableView<ChitietTau> Tau_table;
 
     @FXML
     private TableColumn<ChitietTau, String> Toa_col;
@@ -51,10 +60,6 @@ public class QuanLyTauController implements Initializable {
 
     @FXML
     private TableColumn<ChitietTau, Button> Update_col;
-
-    @FXML
-    private Label chucnang_id;
-
     @FXML
     private Button clear_btn_add_id;
 
@@ -68,7 +73,7 @@ public class QuanLyTauController implements Initializable {
     private Button insert_btn_id;
 
     @FXML
-    private TableColumn<ChitietTau, String> loaitoa_ct_col;
+    private TableColumn<ChitietTau, String> loaitoa_col;
 
     @FXML
     private Button passenger_form_btn;
@@ -81,9 +86,6 @@ public class QuanLyTauController implements Initializable {
 
     @FXML
     private Button quanlytau_minus;
-
-    @FXML
-    private Button quanlytau_phongto;
 
     @FXML
     private Button search_btn_id;
@@ -99,114 +101,34 @@ public class QuanLyTauController implements Initializable {
 
     @FXML
     private Button train_mana_form_btn;
-    // Quản lý tàu
-    @FXML
-    private AnchorPane QuanlyTau_form;
-
-    @FXML
-    private AnchorPane QuanlychitietTau_form;
-
-    @FXML
-    private TableColumn<Tau, String> ID_Tau_tau_col;
-    @FXML
-    private TableColumn<Tau, Integer> Soluongtoa_tau_col;
-    @FXML
-    private TableView<Tau> Tau_TableView;
-    @FXML
-    private TableColumn<Tau, String> Trangthai_tau_col;
-
-    @FXML
-    private ComboBox<Tau> tau_id_combobox1;
-
-    @FXML
-    private ComboBox<String> trangthai_combobox;
-    @FXML
-    private TextField ten_tau_text_id;
-    @FXML
-    private TextField soluongtoa_tau_text_id;
-    @FXML
-    private TextField trangthai_tau_text_id;
-
-
-    // Biến cho Chức năng chung
-    Alert alert = null;
-
-
+    private Alert alert;
     String query = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     Statement statement = null;
     ResultSet resultSet = null;
     Tau tau = null;
-
-    public static ChitietTau chitietTau_Add = new ChitietTau();
-
-    public static ChitietTau chitiettau_Update = new ChitietTau();
-
-    public static ChitietTau Get_ChitietTau_Update()
-    {
-        return chitiettau_Update;
-    }
-
-    // Chức năng cho Quản lý chi tiết tàu
-
-    ObservableList<ChitietTau> ChitietTauList = FXCollections.observableArrayList();
-    ObservableList<Tau> TauList = FXCollections.observableArrayList();
+    Stage stage_dashbroard = new Stage();
+    ObservableList<ChitietTau> TauList = FXCollections.observableArrayList();
+    ObservableList<Button_Extend> Button_List = FXCollections.observableArrayList();
     @FXML
-    void Clear_Click_chitietTau(MouseEvent event) {
+    void Clear_Click(MouseEvent event) {
         tau_id_combobox.setValue(null);
         Toa_id_combobox.setValue(null);
         Loaitoa_id_combobox.setValue(null);
     }
 
     @FXML
-    void Search_click_chitietTau(MouseEvent event) {
-        Search_chitietTau();
+    void Search_click(MouseEvent event) {
+        Search_Tau();
     }
     @FXML
-    void Refresh_click_chitietTau(MouseEvent event) {
-        loadData_ChitietTau();
+    void Refresh_click(MouseEvent event) {
+        loadData();
     }
     @FXML
-    void Insert_tau_click_chitietTau(MouseEvent event) throws SQLException {
-
-        if ((tau_add_id.getText().isEmpty()) || (Soluongtoa_id.getText().isEmpty()) )
-        {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Note Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Điền đẩy đủ thông tin tàu thêm");
-            alert.showAndWait();
-        }
-
-        else {
-
-            String ID_tau = tau_add_id.getText();
-            String SLtoa = Soluongtoa_id.getText();
-            resultSet = Database.SELECT_STRING_FROM_TABLE(connection, "tau", "ID_Tau", ID_tau);
-            if (resultSet.next()) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Note Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Tàu đã tồn tại");
-                alert.showAndWait();
-
-            }
-            else {
-
-
-                Tau tau_insert = new Tau(ID_tau, Integer.parseInt(SLtoa));
-                chitietTau_Add.setTau(tau_insert);
-                String FXMLPATH_Them_tau = "/DashBroard/Quanlytau/ThemTau/themtau.fxml";
-                try {
-                    Show_Window showWindow = new Show_Window();
-                    showWindow.Show(FXMLPATH_Them_tau);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-
+    void Insert_tau_click(MouseEvent event) {
+        Insert_Tau();
     }
     @FXML
     void quanlytau_close_click(MouseEvent event) {
@@ -220,50 +142,64 @@ public class QuanLyTauController implements Initializable {
         stage.setIconified(true);
     }
 
-    @FXML
-    void quanlytau_phongto_click(MouseEvent event) {
-
-    }
-    Parent root;
-    Stage stage_dashbroard = new Stage();
-    Stage stage_quanlytau = new Stage();
-
-
+    public void loadData()
     {
-        try {
-            root = FXMLLoader.load(getClass().getResource("/DashBroard/dashbroard.fxml"));
-            Scene scene_DashBroard = new Scene(root);
-            stage_dashbroard.initStyle(StageStyle.TRANSPARENT);
-            stage_dashbroard.setTitle("DashBroard");
-            stage_dashbroard.setScene(scene_DashBroard);
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @FXML
-    void Switch_train_form(MouseEvent event) {
-        stage_quanlytau = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        stage_dashbroard.show();
-        stage_quanlytau.close();
-    }
-
-    public void loadData_ChitietTau()
-    {
-        RefreshTable_ChitietTau();
-        Combobox_tau(tau_id_combobox);
-        combobox_loaitoa(Loaitoa_id_combobox);
-        ID_Tau_ct_col.setCellValueFactory(new PropertyValueFactory<>("ID_Tau"));
+        RefreshTable();
+        Combobox_tau();
+        combobox_loaitoa();
+        ID_Tau_col.setCellValueFactory(new PropertyValueFactory<>("ID_Tau"));
         Toa_col.setCellValueFactory(new PropertyValueFactory<>("ID_toa"));
-        Soluongghe_ct_col.setCellValueFactory(new PropertyValueFactory<>("Soluongghe"));
-        loaitoa_ct_col.setCellValueFactory(new PropertyValueFactory<>("Loaitoa"));
+        Soluongghe_col.setCellValueFactory(new PropertyValueFactory<>("Soluongghe"));
+        loaitoa_col.setCellValueFactory(new PropertyValueFactory<>("Loaitoa"));
+        Delete_col.setCellValueFactory(new PropertyValueFactory<>("Delete_btn"));
+        Detail_col.setCellValueFactory(new PropertyValueFactory<>("Detail_btn"));
+        Update_col.setCellValueFactory(new PropertyValueFactory<>("Update_btn"));
+        Delete_col.setCellFactory(param -> new TableCell<>() {
+            Button deleteButton = new Button("Xóa");
 
+            @Override
+            protected void updateItem(Button item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(deleteButton);
+                    deleteButton.setOnAction(event -> {
+                        ChitietTau tau = getTableView().getItems().get(getIndex());
+                        TauList.remove(tau);
+                    });
+                }
+            }
+        });
+        Update_col.setCellFactory(param -> new TableCell<>() {
+            final Button UpdateButton = new Button("Sửa");
+
+            @Override
+            protected void updateItem(Button item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(UpdateButton);
+
+                    UpdateButton.setOnAction(event -> {
+                        ChitietTau tau = getTableView().getItems().get(getIndex());
+                        String FXMLPATH = "/DashBroard/InformationView/Information_train.fxml";
+                        try {
+                            Show_Window showWindow =new Show_Window();
+                            showWindow.Show(FXMLPATH);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                }
+            }
+        });
+        searchTrain_txt();
     }
-
-    public void RefreshTable_ChitietTau()
+    public void RefreshTable()
     {
-        ChitietTauList.clear();
+        TauList.clear();
         connection = Database.connectionDB();
         query = "SELECT \n" +
                 "\ttoa_tau.ID_Tau as ID_tau ,\n" +
@@ -280,24 +216,20 @@ public class QuanLyTauController implements Initializable {
             {
                 tau = new Tau(resultSet.getString("ID_tau"),resultSet.getInt("soluongtoa"));
 
-                ChitietTauList.add(new ChitietTau(tau,
+                TauList.add(new ChitietTau(tau,
                         resultSet.getString("Toa"),
                         resultSet.getInt("SLghe"),
                         resultSet.getString("loaitoa"))
-                );
-
-
-
+                        );
             }
-            chitietTauTableView.setItems(ChitietTauList);
+            Tau_table.setItems(TauList);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
     }
-
-    public void Combobox_tau(ComboBox <Tau> comboBox)
+    public void Combobox_tau()
     {
         try {
             Tau tau = null;
@@ -307,20 +239,13 @@ public class QuanLyTauController implements Initializable {
             // Lấy dữ liệu từ cơ sở dữ liệu và thêm vào combobox
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-//                    System.out.println(resultSet.getInt("idTau"));
                 String ID_Tau = resultSet.getString("ID_Tau");
                 int soluongtoa = resultSet.getInt("Soluongtoa");
 
                 tau = new Tau(ID_Tau,soluongtoa);
-//                tau_id_combobox.getItems().add(tau);
-                comboBox.getItems().add(tau);
+                tau_id_combobox.getItems().add(tau);
             }
 
-            // Xử lý sự kiện khi combobox được chọn
-//            gadi_id_combox.setOnAction(event -> {
-//                String selectedTrain = gadi_id_combox.getValue();
-//
-//            });
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -328,37 +253,25 @@ public class QuanLyTauController implements Initializable {
     @FXML
     void Select_toa_combobox(MouseEvent event) {
         Toa_id_combobox.getItems().clear();
-        if (tau_id_combobox.getValue() == null)
-        {
-            alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Note Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Valid train");
-            alert.showAndWait();
-        }
-        else {
-            Tau tau = tau_id_combobox.getValue();
-            String ID_tau = tau.getIDTau();
-            System.out.println(ID_tau);
-            query = "SELECT ID_Toatau FROM toa_tau\n" +
-                    "WHERE ID_Tau = ?";
-            try {
-                preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, ID_tau);
-                resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    Toa_id_combobox.getItems().add(resultSet.getString("ID_Toatau"));
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+//        Tau tau = tau_id_combobox.getValue();
+        String ID_tau = String.valueOf(tau_id_combobox.getValue());
+//        String ID_tau = tau.getIDTau();
+        query = "SELECT ID_Toatau FROM toa_tau\n" +
+                "WHERE ID_Tau = ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,ID_tau);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Toa_id_combobox.getItems().add(resultSet.getString("ID_Toatau"));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
     }
-    public void combobox_loaitoa(ComboBox<String> comboBox)
-    {
+    public void combobox_loaitoa() {
         try {
-
             query = "SELECT DISTINCT Loaitoa FROM toa_tau";
             preparedStatement = connection.prepareStatement(query);
 
@@ -366,14 +279,13 @@ public class QuanLyTauController implements Initializable {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String loaitoa = resultSet.getString("Loaitoa");
-                comboBox.getItems().add(loaitoa);
+                Loaitoa_id_combobox.getItems().add(loaitoa);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-    public void Search_chitietTau()
+    public void Search_Tau()
     {
         connection = Database.connectionDB();
         ChitietTau chitietTau = new ChitietTau();
@@ -397,16 +309,8 @@ public class QuanLyTauController implements Initializable {
                 "WHERE (ID_tau = ? OR ? is null ) " +
                 "AND (Toa = ? OR ? is null ) " +
                 "AND (loaitoa = ? OR ? is null) " ;
-        ChitietTauList.clear();
-
-        if (tau_id_combobox.getValue() == null)
-        {
-            Tau = null;
-        }
-        else
-        {
-            Tau = tau_id_combobox.getValue().getIDTau();
-        }
+        TauList.clear();
+        Tau = tau_id_combobox.getValue().getIDTau();
         Toa = Toa_id_combobox.getValue();
         Loaitoa = Loaitoa_id_combobox.getValue();
         try {
@@ -422,7 +326,7 @@ public class QuanLyTauController implements Initializable {
             while (resultSet.next())
             {
                 tau = new Tau(resultSet.getString("ID_tau"),resultSet.getInt("soluongtoa"));
-                ChitietTauList.add(new ChitietTau(tau,
+                TauList.add(new ChitietTau(tau,
                         resultSet.getString("Toa"),
                         resultSet.getInt("SLghe"),
                         resultSet.getString("loaitoa")));
@@ -431,312 +335,103 @@ public class QuanLyTauController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        chitietTauTableView.setItems(ChitietTauList);
-
+        Tau_table.setItems(TauList);
     }
-
     @FXML
-    void Switch_xemKhachhang(MouseEvent event) {
+    void Switch_train_form(MouseEvent event) {
+        stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        String FXMLPATH_quanlychuyentau = "/DashBroard/dashbroard.fxml";
 
-    }
-
-    @FXML
-    void logout(MouseEvent event) {
-
-    }
-    public static ChitietTau getChitietTau_Add() {
-        return chitietTau_Add;
-    }
-    private void Delete_in_DBchitiettau(String ID_Tau)
-    {
-        Database.DELETE_String_FROM_TABLE(connection,"tau","ID_Tau",ID_Tau);
-    }
-
-    @FXML
-    void Switch_Quanlychitiettau(MouseEvent event) {
-        QuanlychitietTau_form.setVisible(true);
-        QuanlyTau_form.setVisible(false);
-
-    }
-
-    @FXML
-    void Switch_Quanlytau(MouseEvent event) {
-        QuanlyTau_form.setVisible(true);
-        QuanlychitietTau_form.setVisible(false);
-    }
-
-    // Quản lý tàu
-    public void combobox_trangthai(ComboBox<String> comboBox)
-    {
         try {
-
-            query = "SELECT DISTINCT Trangthai FROM tau";
-            preparedStatement = connection.prepareStatement(query);
-
-            // Lấy dữ liệu từ cơ sở dữ liệu và thêm vào combobox
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String Trangthai = resultSet.getString("Trangthai");
-                comboBox.getItems().add(Trangthai);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            Show_Window showWindow = new Show_Window();
+            showWindow.Show(FXMLPATH_quanlychuyentau);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
+        stage_dashbroard.close();
     }
-    public void RefreshTable_Tau()
+    @FXML
+    void Switch_xemKhachhang(MouseEvent event) throws IOException {
+        stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        String FXMLPATH_quanlykhachhang = "/DashBroard/QuanlyKhachhang/quanlyKhachhang.fxml";
+
+        try {
+            Show_Window showWindow = new Show_Window();
+            showWindow.Show(FXMLPATH_quanlykhachhang);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage_dashbroard.close();
+    }
+    public void Insert_Tau()
     {
-        TauList.clear();
-        connection = Database.connectionDB();
-        query = "SELECT * FROM tau";
+        query = "INSERT INTO `tau` (`ID_Tau`, `Soluongtoa`) VALUES (?, ?)";
         try {
             preparedStatement = connection.prepareStatement(query);
-            resultSet = preparedStatement.executeQuery();
-            while(resultSet.next())
-            {
-                tau = new Tau(resultSet.getString("ID_Tau"),
-                        resultSet.getInt("Soluongtoa"),
-                        resultSet.getString("Trangthai"));
-                TauList.add(tau);
-            }
+            preparedStatement.setString(1, tau_add_id.getText());
+            preparedStatement.setString(2, Soluongtoa_id.getText());
+
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        Tau_TableView.setItems(TauList);
-
-    }
-    public void loadData_Tau()
-    {
-        RefreshTable_Tau();
-        Combobox_tau(tau_id_combobox1);
-        combobox_trangthai(trangthai_combobox);
-        ID_Tau_tau_col.setCellValueFactory(new PropertyValueFactory<>("IDTau"));
-        Soluongtoa_tau_col.setCellValueFactory(new PropertyValueFactory<>("Soluongtoa"));
-        Trangthai_tau_col.setCellValueFactory(new PropertyValueFactory<>("Trangthai"));
-
+        RefreshTable();
     }
 
-
-    @FXML
-    void Search_Click_tau(MouseEvent event) {
-        Search_Tau();
+    private void searchTrain_txt() {
+        FilteredList<ChitietTau> filteredList = new FilteredList<>(TauList, b -> true);
+        search_tau_txt.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(tau -> {
+                if (newValue == null || newValue.isEmpty() || newValue.isBlank()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (tau.getID_Tau().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+//                } else if (customerInformation.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+//                    return true;
+//                } else if (customerInformation.getUsername().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+//                    return true;
+//                } else if (customerInformation.getPhone().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+//                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+        SortedList<ChitietTau> sortedList = new SortedList<>(filteredList);
+        sortedList.comparatorProperty().bind(Tau_table.comparatorProperty());
+        Tau_table.setItems(sortedList);
     }
-    @FXML
-    void Clear_click_Tau(MouseEvent event) {
-        tau_id_combobox1.setValue(null);
-        trangthai_combobox.setValue(null);
-    }
 
-    @FXML
-    void Clear_click_Tau1(MouseEvent event) {
-        ten_tau_text_id.setText(null);
-        soluongtoa_tau_text_id.setText(null);
-    }
-
-    @FXML
-    void Insert_click_Tau(MouseEvent event) throws SQLException {
-        if ((ten_tau_text_id.getText().isEmpty()) || (soluongtoa_tau_text_id.getText().isEmpty()) )
-        {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Note Message");
+    public  void  logout() {
+        try {
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Error Message");
             alert.setHeaderText(null);
-            alert.setContentText("Điền đẩy đủ thông tin tàu thêm");
-            alert.showAndWait();
-        }
+            alert.setContentText("Are you sure you want to logout?");
+            Optional<ButtonType> option = alert.showAndWait();
 
-        else {
-
-            String ID_tau = ten_tau_text_id.getText();
-            String SLtoa = soluongtoa_tau_text_id.getText();
-            System.out.println("So luong toa là" + SLtoa);
-            resultSet = Database.SELECT_STRING_FROM_TABLE(connection, "tau", "ID_Tau", ID_tau);
-            if (resultSet.next()) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Note Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Tàu đã tồn tại");
-                alert.showAndWait();
-
+            if (option.get().equals(ButtonType.OK)) {
+                /* TO HIDE MAIN FORM */
+                signout_btn.getScene().getWindow().hide();
+                /* LINK YOUR LOGIN FORM AND SHOW IT */
+                Parent root_logout = FXMLLoader.load(getClass().getResource("/Main/login-view.fxml"));
+                Stage stage_logout = new Stage();
+                Scene scene_logout = new Scene(root_logout);
+                stage_logout.initStyle(StageStyle.TRANSPARENT);
+                stage_logout.setScene(scene_logout);
+                stage_logout.show();
             }
             else {
-
-                Tau tau_insert = new Tau(ID_tau, Integer.parseInt(SLtoa));
-                chitietTau_Add.setTau(tau_insert);
-                String FXMLPATH_Them_tau = "/DashBroard/Quanlytau/ThemTau/themtau.fxml";
-                try {
-                    Show_Window showWindow = new Show_Window();
-                    showWindow.Show(FXMLPATH_Them_tau);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                RefreshTable();
             }
-        }
-    }
-    public void Search_Tau()
-    {
-        TauList.clear();
-        String ID_Tau = null;
-        String Trangthai = null;
-        if (tau_id_combobox1.getValue() == null)
-        {
-            ID_Tau = null;
-        }
-        else
-        {
-            ID_Tau = tau_id_combobox1.getValue().getIDTau();
-        }
-
-
-        query = "SELECT *\n" +
-                "FROM tau\n" +
-                "WHERE (ID_tau = ? or ? is null)\n" +
-                "AND (Trangthai = ? or ? is null)";
-        try {
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,ID_Tau);
-            preparedStatement.setString(2,ID_Tau);
-            preparedStatement.setString(3,Trangthai);
-            preparedStatement.setString(4,Trangthai);
-            resultSet = preparedStatement.executeQuery();
-            while(resultSet.next())
-            {
-                tau = new Tau(resultSet.getString("ID_Tau"),
-                        resultSet.getInt("Soluongtoa"),
-                        resultSet.getString("Trangthai"));
-                TauList.add(tau);
-            }
-        } catch (SQLException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Tau_TableView.setItems(TauList);
-
     }
-
-    public void Button_Extend_ChitietTau()
-    {
-        TableColumn<ChitietTau, Void> UpdateColumn = new TableColumn<>("Update");
-        Callback<TableColumn<ChitietTau, Void>, TableCell<ChitietTau, Void>> cellFactory1 = new Callback<>() {
-            @Override
-            public TableCell<ChitietTau, Void> call(final TableColumn<ChitietTau, Void> param) {
-                final TableCell<ChitietTau, Void> cell = new TableCell<>() {
-                    private final Button updateButton = new Button("Update");
-
-                    {
-                        updateButton.setOnAction(event -> {
-
-                            chitiettau_Update = getTableView().getItems().get(getIndex());
-                            String FXMLPATH_Them_tau = "/DashBroard/Quanlytau/EditTau/EditTau.fxml";
-                            try {
-                                Show_Window showWindow =new Show_Window();
-                                showWindow.Show(FXMLPATH_Them_tau);
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-
-                            //Tau_table.getItems().remove(item);
-
-                        });
-                    }
-
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(updateButton);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-        UpdateColumn.setCellFactory(cellFactory1);
-        chitietTauTableView.getColumns().add(UpdateColumn);
-
-        TableColumn<ChitietTau, Void> deleteColumn = new TableColumn<>("Delete");
-        Callback<TableColumn<ChitietTau, Void>, TableCell<ChitietTau, Void>> cellFactory = new Callback<>() {
-            @Override
-            public TableCell<ChitietTau, Void> call(final TableColumn<ChitietTau, Void> param) {
-                final TableCell<ChitietTau, Void> cell = new TableCell<>() {
-                    private final Button deleteButton = new Button("Delete");
-
-                    {
-                        deleteButton.setOnAction(event -> {
-
-                            ChitietTau item = getTableView().getItems().get(getIndex());
-                            chitietTauTableView.getItems().remove(item);
-                            alert = new Alert(Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("Error Message");
-                            alert.setHeaderText(null);
-                            alert.setContentText("Bạn xác nhận muốn xóa?");
-                            Optional<ButtonType> option = alert.showAndWait();
-                            if (option.get().equals(ButtonType.OK)) {
-                                Delete_in_DBchitiettau(item.getID_Tau());
-                            } else {
-                                RefreshTable_ChitietTau();
-                            }
-
-                        });
-                    }
-
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(deleteButton);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-        deleteColumn.setCellFactory(cellFactory);
-        chitietTauTableView.getColumns().add(deleteColumn);
-    }
-    public void Button_Extend_Tau()
-    {
-        TableColumn<Tau, Void> UpdateColumn = new TableColumn<>("Xóa");
-        Callback<TableColumn<Tau, Void>, TableCell<Tau, Void>> cellFactory1 = new Callback<>() {
-            @Override
-            public TableCell<Tau, Void> call(final TableColumn<Tau, Void> param) {
-                final TableCell<Tau, Void> cell = new TableCell<>() {
-                    private final Button updateButton = new Button("Xóa");
-
-                    {
-                        updateButton.setOnAction(event -> {
-
-
-
-                        });
-                    }
-
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(updateButton);
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-        UpdateColumn.setCellFactory(cellFactory1);
-        Tau_TableView.getColumns().add(UpdateColumn);
-    }
-
-    // Chạy khởi tạo ban đầu
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadData_ChitietTau();
-        loadData_Tau();
-        Button_Extend_ChitietTau();
-        Button_Extend_Tau();
-
+        loadData();
     }
 }

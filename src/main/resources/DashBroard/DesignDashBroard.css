@@ -15,7 +15,7 @@
     -fx-cursor:hand;
 }
 .minimize:hover{
-    -fx-background-color:#dadada;
+    -fx-background-color:#dff3ffff;
 }
 
 .nav-form{
@@ -120,13 +120,7 @@
     -fx-font-size : 14px;
     -fx-cursor:hand;
 }
-.search_btn{
-    -fx-background-color:#337254;
-    -fx-background-radius:8px;
-    -fx-text-fill: #fff;
-    -fx-font-size : 14px;
-    -fx-cursor:hand;
-}
+
 .update_btn:hover{
     -fx-background-color:#3ea185;
 }
@@ -196,6 +190,11 @@
 
 }
 
-.centered-tableview {
-    -fx-alignment: center; /* Căn lề nội dung theo chiều ngang (trục chính) */
+.refresh{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
 }
+.refresh:hover{
+    -fx-background-color:#c2e7ffff;
+}
+

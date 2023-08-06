@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="731.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vetau.TableView.QuanLyTau.ThemTau.ThemTauController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="731.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="66.0" layoutY="14.0" prefHeight="684.0" prefWidth="797.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,12 +20,12 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="Tau_add_close_btn" layoutX="746.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#Close_themtau_Click" prefHeight="24.0" prefWidth="52.0">
+                  <Button fx:id="Tau_add_close_btn" layoutX="746.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="52.0">
                      <graphic>
                         <FontAwesomeIcon glyphName="CLOSE" />
                      </graphic>
                   </Button>
-                  <Button fx:id="Tau_add_minus_btn" layoutX="694.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#Minus_themtau_Click" prefHeight="24.0" prefWidth="52.0">
+                  <Button fx:id="Tau_add_minus_btn" layoutX="694.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="52.0">
                      <graphic>
                         <FontAwesomeIcon glyphName="MINUS" />
                      </graphic>
@@ -46,12 +46,12 @@
                         <TableColumn fx:id="Loaitoa_add_col" prefWidth="274.0" text="Loại toa" />
                     </columns>
                   </TableView>
-                  <Button fx:id="Tau_add_OK_btn" layoutX="354.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#Save_Tau_Click" prefHeight="40.0" prefWidth="98.0" styleClass="login-btn" stylesheets="@giaodien.css" text="OK" textAlignment="CENTER">
+                  <Button fx:id="Tau_add_OK_btn" layoutX="354.0" layoutY="533.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="98.0" styleClass="login-btn" stylesheets="@giaodien.css" text="OK" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Tau_add_Cancle_btn" layoutX="687.0" layoutY="535.0" mnemonicParsing="false" onMouseClicked="#Cancle_Click" prefHeight="40.0" prefWidth="98.0" text="Cancel">
+                  <Button fx:id="Tau_add_Cancle_btn" layoutX="687.0" layoutY="535.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="98.0" text="Cancel">
                      <font>
                         <Font size="19.0" />
                      </font>

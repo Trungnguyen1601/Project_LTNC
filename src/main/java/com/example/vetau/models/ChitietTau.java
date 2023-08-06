@@ -7,15 +7,10 @@ public class ChitietTau {
     private String ID_toa;
     private int Soluongghe;
     private String Loaitoa;
-    private String Trangthai;
 
-    public String getTrangthai() {
-        return Trangthai;
-    }
-
-    public void setTrangthai(String trangthai) {
-        Trangthai = trangthai;
-    }
+    private Button Delete_btn;
+    private Button Detail_btn;
+    private Button Update_btn;
 
     public ChitietTau()
     {
@@ -27,21 +22,14 @@ public class ChitietTau {
         this.ID_toa = ID_toa;
         Soluongghe = soluongghe;
         Loaitoa = loaitoa;
-
-    }
-    public ChitietTau(Tau tau1,String ID_toa)
-    {
-        this.tau = tau1;
-        this.ID_toa = ID_toa;
-
     }
 
     public Tau getTau() {
         return tau;
     }
 
-    public void setTau(Tau tau1) {
-        this.tau = tau1;
+    public void setTau(Tau tau) {
+        this.tau = tau;
     }
 
     public String getID_toa() {
@@ -54,10 +42,6 @@ public class ChitietTau {
 
     public int getSoluongghe() {
         return Soluongghe;
-    }
-
-    public String getSLghe(){
-        return String.valueOf(Soluongghe);
     }
 
     public void setSoluongghe(int soluongghe) {
@@ -79,14 +63,16 @@ public class ChitietTau {
     {
         return tau.getSoluongtoa();
     }
-    public void setID_Tau(String ID_tau)
-    {
-        tau.setIDTau(ID_tau);
-    }
-    public void setSoluongtoa(int SLtoa)
-    {
-        tau.setSoluongtoa(SLtoa);
+
+    public Button getDelete_btn() {
+        return Delete_btn;
     }
 
+    public Button getDetail_btn() {
+        return Detail_btn;
+    }
 
+    public Button getUpdate_btn() {
+        return Update_btn;
+    }
 }

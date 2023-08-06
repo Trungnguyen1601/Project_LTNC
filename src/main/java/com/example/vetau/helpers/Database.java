@@ -8,7 +8,7 @@ public class Database {
         try{
             //Class.forName("com.mysql.jdbc.Driver");
 
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/quanlyvetau", "root", "trung1601");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TicketBookingManagement", "root", "");
             return  connection;
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,11 +26,12 @@ public class Database {
             return resultSet;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
 
 
     }
-    public static ResultSet SELECT_STRING_FROM_TABLE(Connection connection,String TableName, String ColumnName,String Data)
+    public static ResultSet SELECT_String_FROM_TABLE(Connection connection,String TableName, String ColumnName,String Data)
     {
         String sql = "SELECT * "+ " FROM " + TableName + " WHERE " + ColumnName + " = ?";
 
@@ -57,19 +58,20 @@ public class Database {
             return resultSet;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
 
 
     }
-    public static void DELETE_String_FROM_TABLE(Connection connection,String TableName, String ColumnName,String Data)
+    public static ResultSet DELETE_String_FROM_TABLE(Connection connection,String TableName, String ColumnName,String Data)
     {
         String sql = "DELETE" + " FROM " + TableName + " WHERE " + ColumnName + " = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,Data);
-            preparedStatement.executeUpdate();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet;
         } catch (SQLException e) {
             throw new RuntimeException(e);
 

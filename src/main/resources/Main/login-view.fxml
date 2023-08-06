@@ -30,8 +30,8 @@
                   <String fx:value="minimize" />
                </styleClass>
                 </Button>
-                <TextField fx:id="signin_username" layoutX="138.0" layoutY="295.0" onAction="#signin" prefHeight="30.0" prefWidth="263.0" promptText="Username" styleClass="textfield" stylesheets="@login.css" text="1" />
-                <PasswordField fx:id="signin_password" layoutX="138.0" layoutY="373.0" onAction="#signin" prefHeight="30.0" prefWidth="263.0" promptText="Password" styleClass="textfield" text="1" />
+                <TextField fx:id="signin_username" layoutX="138.0" layoutY="295.0" onAction="#signin" prefHeight="30.0" prefWidth="263.0" promptText="Username" styleClass="textfield" stylesheets="@login.css" />
+                <PasswordField fx:id="signin_password" layoutX="138.0" layoutY="373.0" onAction="#signin" prefHeight="30.0" prefWidth="263.0" promptText="Password" styleClass="textfield" />
                 <Button fx:id="signin_btn_login" layoutX="213.0" layoutY="478.0" mnemonicParsing="false" onAction="#signin" prefHeight="55.0" prefWidth="113.0" styleClass="login-btn" stylesheets="@login.css" text="Log in">
                     <font>
                         <Font name="Microsoft Tai Le" size="12.0" />
