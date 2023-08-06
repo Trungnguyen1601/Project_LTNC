@@ -4,8 +4,6 @@ module com.example.vetau {
     requires java.sql;
 
 
-
-
     opens com.example.vetau.TableView.InformationView to javafx.fxml;
     exports com.example.vetau.TableView.InformationView;
     opens com.example.vetau.TableView.QuanLyTau to javafx.fxml;
@@ -22,6 +20,9 @@ module com.example.vetau {
 
     opens com.example.vetau.TableView.QuanLyTau.ThemTau to javafx.fxml;
     exports com.example.vetau.TableView.QuanLyTau.ThemTau;
+    opens com.example.vetau.TableView.QuanLyTau.EditTrain to javafx.fxml;
+    exports com.example.vetau.TableView.QuanLyTau.EditTrain;
     exports com.example.vetau.Password;
     opens com.example.vetau.Password to javafx.fxml;
+
 }
