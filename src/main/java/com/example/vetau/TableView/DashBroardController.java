@@ -151,24 +151,10 @@ public class DashBroardController implements Initializable {
         return Train_id;
     }
 
-    Stage stage_dashbroard, stage_quanlytau, stage_quanlykhachhang = new Stage();
-
-    Parent root2;
-
-
+    Stage stage_dashbroard
 
     ObservableList<Chuyen_tau> chuyentauList = FXCollections.observableArrayList();
 
-    @FXML
-    void enlargeWindow(MouseEvent event) {
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX(screenBounds.getMinX());
-        stage.setY(screenBounds.getMinY());
-        stage.setWidth(screenBounds.getWidth());
-        stage.setHeight(screenBounds.getHeight());
-
-    }
     private void loadData()
     {
         connection = Database.connectionDB();
