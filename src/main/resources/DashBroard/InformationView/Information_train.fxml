@@ -13,7 +13,7 @@
    <children>
       <AnchorPane fx:id="Infor_form" prefHeight="600.0" prefWidth="650.0" styleClass="bg-form" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="88.0" prefWidth="659.0" styleClass="bg-white" stylesheets="@../DesignDashBroard.css">
+            <AnchorPane prefHeight="88.0" prefWidth="659.0" styleClass="bg-white" stylesheets="@../DesignDashBoard.css">
                <children>
                   <Label alignment="CENTER" layoutX="205.0" layoutY="31.0" text="Thông tin chuyến tàu">
                      <font>
@@ -27,7 +27,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="273.0" layoutY="94.0" prefHeight="512.0" prefWidth="386.0" style="-fx-background-color: #d3edff;" styleClass="bg-form" stylesheets="@../DesignDashBroard.css">
+            <AnchorPane layoutX="273.0" layoutY="94.0" prefHeight="512.0" prefWidth="386.0" style="-fx-background-color: #d3edff;" styleClass="bg-form" stylesheets="@../DesignDashBoard.css">
                <children>
                   <TextField fx:id="giodi_infor_text" layoutX="146.0" layoutY="95.0" prefHeight="35.0" prefWidth="208.0" styleClass="textfield" stylesheets="@control.css" />
                   <TextField fx:id="veban_infor_text" layoutX="146.0" layoutY="375.0" prefHeight="35.0" prefWidth="208.0" styleClass="textfield" stylesheets="@control.css" />

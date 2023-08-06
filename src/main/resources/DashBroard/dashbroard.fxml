@@ -20,14 +20,14 @@
          <top>
             <AnchorPane prefHeight="66.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane layoutX="29.0" layoutY="-67.0" prefHeight="57.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@DesignDashBroard.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="29.0" layoutY="-67.0" prefHeight="57.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@DesignDashBoard.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button fx:id="dashbroaed_close" layoutX="1298.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#Setdashbroaed_close" prefHeight="24.0" prefWidth="52.0" styleClass="close" stylesheets="@DesignDashBroard.css">
+                        <Button fx:id="dashbroaed_close" layoutX="1298.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#Setdashbroaed_close" prefHeight="24.0" prefWidth="52.0" styleClass="close" stylesheets="@DesignDashBoard.css">
                            <graphic>
                               <FontAwesomeIcon glyphName="CLOSE" />
                            </graphic>
                         </Button>
-                        <Button fx:id="dashbroard_minus" layoutX="1244.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#Setdashbroard_minus" prefHeight="24.0" prefWidth="54.0" styleClass="minimize" stylesheets="@DesignDashBroard.css">
+                        <Button fx:id="dashbroard_minus" layoutX="1244.0" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#Setdashbroard_minus" prefHeight="24.0" prefWidth="54.0" styleClass="minimize" stylesheets="@DesignDashBoard.css">
                            <graphic>
                               <FontAwesomeIcon glyphName="MINUS" />
                            </graphic>
@@ -50,27 +50,27 @@
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font></Label>
-                  <Button fx:id="dashbroard_form_btn" layoutX="3.0" layoutY="275.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="226.0" styleClass="nav-btn" stylesheets="@DesignDashBroard.css" text="DashBroard">
+                  <Button fx:id="dashbroard_form_btn" layoutX="3.0" layoutY="275.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="226.0" styleClass="nav-btn" stylesheets="@DesignDashBoard.css" text="DashBroard">
                      <graphic>
                         <FontAwesomeIcon glyphName="DASHBOARD" />
                      </graphic>
                   </Button>
-                  <Button fx:id="train_form_btn" layoutX="3.0" layoutY="324.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="226.0" styleClass="nav-btn" stylesheets="@DesignDashBroard.css" text="Quản lý chuyến tàu">
+                  <Button fx:id="train_form_btn" layoutX="3.0" layoutY="324.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="226.0" styleClass="nav-btn" stylesheets="@DesignDashBoard.css" text="Quản lý chuyến tàu">
                      <graphic>
                         <FontAwesomeIcon glyphName="EDIT" />
                      </graphic>
                   </Button>
-                  <Button fx:id="passenger_form_btn" layoutX="3.0" layoutY="378.0" mnemonicParsing="false" onMouseClicked="#Switch_xemKhachhang" prefHeight="36.0" prefWidth="226.0" styleClass="nav-btn" stylesheets="@DesignDashBroard.css" text="Xem khách hàng">
+                  <Button fx:id="passenger_form_btn" layoutX="3.0" layoutY="378.0" mnemonicParsing="false" onMouseClicked="#Switch_xemKhachhang" prefHeight="36.0" prefWidth="226.0" styleClass="nav-btn" stylesheets="@DesignDashBoard.css" text="Xem khách hàng">
                      <graphic>
                         <FontAwesomeIcon glyphName="EYE" />
                      </graphic>
                   </Button>
-                  <Button fx:id="quanlytau_form_btn" layoutX="3.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#Switch_quanlytau" prefHeight="36.0" prefWidth="226.0" styleClass="nav-btn" stylesheets="@DesignDashBroard.css" text="Quản lý thông tin tàu">
+                  <Button fx:id="quanlytau_form_btn" layoutX="3.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#Switch_quanlytau" prefHeight="36.0" prefWidth="226.0" styleClass="nav-btn" stylesheets="@DesignDashBoard.css" text="Quản lý thông tin tàu">
                      <graphic>
                         <FontAwesomeIcon glyphName="BOOK" />
                      </graphic>
                   </Button>
-                  <Button fx:id="signout_btn" layoutX="16.0" layoutY="619.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="36.0" prefWidth="215.0" styleClass="nav-btn" stylesheets="@DesignDashBroard.css" text="Đăng xuất">
+                  <Button fx:id="signout_btn" layoutX="16.0" layoutY="619.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="36.0" prefWidth="215.0" styleClass="nav-btn" stylesheets="@DesignDashBoard.css" text="Đăng xuất">
                      <graphic>
                         <FontAwesomeIcon glyphName="SIGN_OUT" size="1.4em" text="" />
                      </graphic></Button>
@@ -87,9 +87,9 @@
                <children>
                   <AnchorPane layoutX="40.0" layoutY="66.0" prefHeight="584.0" prefWidth="857.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane layoutX="4.0" prefHeight="674.0" prefWidth="281.0" styleClass="bg-white" stylesheets="@DesignDashBroard.css">
+                        <AnchorPane layoutX="4.0" prefHeight="674.0" prefWidth="281.0" styleClass="bg-white" stylesheets="@DesignDashBoard.css">
                            <children>
-                              <Label layoutX="25.0" layoutY="89.0" stylesheets="@DesignDashBroard.css" text="Ga đi">
+                              <Label layoutX="25.0" layoutY="89.0" stylesheets="@DesignDashBoard.css" text="Ga đi">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -104,12 +104,12 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tau_id" layoutX="75.0" layoutY="216.0" prefHeight="31.0" prefWidth="190.0" styleClass="add_textfield" stylesheets="@DesignDashBroard.css" />
-                              <TextField fx:id="giodi_id" layoutX="75.0" layoutY="368.0" prefHeight="31.0" prefWidth="189.0" styleClass="add_textfield" stylesheets="@DesignDashBroard.css" />
-                              <Button fx:id="insert_btn_id" layoutX="16.0" layoutY="536.0" mnemonicParsing="false" onAction="#Add_train" prefHeight="45.0" prefWidth="75.0" styleClass="insert_btn" stylesheets="@DesignDashBroard.css" text="Insert" />
-                              <Button fx:id="update_btn_id" layoutX="98.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#Refresh_click" prefHeight="45.0" prefWidth="75.0" styleClass="update_btn" stylesheets="@DesignDashBroard.css" text="Refresh" />
-                              <Button fx:id="clear_btn_id" layoutX="180.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#Clear_Click" prefHeight="45.0" prefWidth="75.0" styleClass="clear_btn" stylesheets="@DesignDashBroard.css" text="Clear" />
-                              <Button fx:id="search_btn_id" layoutX="98.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#Search_click" prefHeight="45.0" prefWidth="75.0" styleClass="clear_btn" stylesheets="@DesignDashBroard.css" text="Search" />
+                              <TextField fx:id="tau_id" layoutX="75.0" layoutY="216.0" prefHeight="31.0" prefWidth="190.0" styleClass="add_textfield" stylesheets="@DesignDashBoard.css" />
+                              <TextField fx:id="giodi_id" layoutX="75.0" layoutY="368.0" prefHeight="31.0" prefWidth="189.0" styleClass="add_textfield" stylesheets="@DesignDashBoard.css" />
+                              <Button fx:id="insert_btn_id" layoutX="16.0" layoutY="536.0" mnemonicParsing="false" onAction="#Add_train" prefHeight="45.0" prefWidth="75.0" styleClass="insert_btn" stylesheets="@DesignDashBoard.css" text="Insert" />
+                              <Button fx:id="update_btn_id" layoutX="98.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#Refresh_click" prefHeight="45.0" prefWidth="75.0" styleClass="update_btn" stylesheets="@DesignDashBoard.css" text="Refresh" />
+                              <Button fx:id="clear_btn_id" layoutX="180.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#Clear_Click" prefHeight="45.0" prefWidth="75.0" styleClass="clear_btn" stylesheets="@DesignDashBoard.css" text="Clear" />
+                              <Button fx:id="search_btn_id" layoutX="98.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#Search_click" prefHeight="45.0" prefWidth="75.0" styleClass="clear_btn" stylesheets="@DesignDashBoard.css" text="Search" />
                               <Label layoutX="15.0" layoutY="293.0" text="Ngày đi">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -131,9 +131,9 @@
                               <ComboBox fx:id="gaden_id_combox" layoutX="75.0" layoutY="154.0" onMouseClicked="#GetValue_Gaden" prefHeight="24.0" prefWidth="189.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="293.0" layoutY="-4.0" prefHeight="587.0" prefWidth="822.0" styleClass="bg-white" stylesheets="@DesignDashBroard.css">
+                        <AnchorPane layoutX="293.0" layoutY="-4.0" prefHeight="587.0" prefWidth="822.0" styleClass="bg-white" stylesheets="@DesignDashBoard.css">
                            <children>
-                              <TableView fx:id="Train_table" layoutX="3.0" layoutY="7.0" prefHeight="664.0" prefWidth="819.0" stylesheets="@DesignDashBroard.css">
+                              <TableView fx:id="Train_table" layoutX="3.0" layoutY="7.0" prefHeight="664.0" prefWidth="819.0" stylesheets="@DesignDashBoard.css">
                                  <columns>
                                     <TableColumn fx:id="gadi_col" prefWidth="102.39996337890625" text="Ga đi" />
                                     <TableColumn fx:id="gaden_col" prefWidth="102.4000244140625" text="Ga đến" />
