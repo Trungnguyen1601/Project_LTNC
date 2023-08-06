@@ -151,7 +151,7 @@ public class DashBroardController implements Initializable {
         return Train_id;
     }
 
-    Stage stage_dashbroard
+    Stage stage_dashbroard = new Stage();
 
     ObservableList<Chuyen_tau> chuyentauList = FXCollections.observableArrayList();
 
