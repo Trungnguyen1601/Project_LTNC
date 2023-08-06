@@ -181,7 +181,7 @@ public class QuanLyTauController implements Initializable {
 
                     UpdateButton.setOnAction(event -> {
                         ChitietTau tau = getTableView().getItems().get(getIndex());
-                        String FXMLPATH = "/DashBroard/InformationView/Information_train.fxml";
+                        String FXMLPATH = "/DashBoard/InformationView/Information_train.fxml";
                         try {
                             Show_Window showWindow =new Show_Window();
                             showWindow.Show(FXMLPATH);
@@ -337,7 +337,7 @@ public class QuanLyTauController implements Initializable {
     @FXML
     void Switch_train_form(MouseEvent event) {
         stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        String FXMLPATH_quanlychuyentau = "/DashBroard/dashboard.fxml";
+        String FXMLPATH_quanlychuyentau = "/DashBoard/dashboard.fxml";
 
         try {
             Show_Window showWindow = new Show_Window();
@@ -350,7 +350,7 @@ public class QuanLyTauController implements Initializable {
     @FXML
     void Switch_xemKhachhang(MouseEvent event) throws IOException {
         stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        String FXMLPATH_quanlykhachhang = "/DashBroard/QuanlyKhachhang/quanlyKhachhang.fxml";
+        String FXMLPATH_quanlykhachhang = "/DashBoard/QuanlyKhachhang/quanlyKhachhang.fxml";
 
         try {
             Show_Window showWindow = new Show_Window();

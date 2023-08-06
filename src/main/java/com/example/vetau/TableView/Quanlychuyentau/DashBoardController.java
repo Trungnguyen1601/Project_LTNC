@@ -202,9 +202,9 @@ public class DashBoardController implements Initializable {
                     inforButton.setOnAction(event -> {
                         Chuyen_tau chuyentau = getTableView().getItems().get(getIndex());
                         Train_id = chuyentau.getID_train();
-                        String FXMLPATH = "/DashBroard/InformationView/Information_train.fxml";
+                        String FXMLPATH = "/DashBoard/InformationView/Information_train.fxml";
                         try {
-                            Show_Window showWindow =new Show_Window();
+                            Show_Window showWindow = new Show_Window();
                             showWindow.Show(FXMLPATH);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
@@ -548,7 +548,7 @@ public class DashBoardController implements Initializable {
     @FXML
     void Switch_quanlytau(MouseEvent event) throws IOException {
         stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        String FXMLPATH_quanlytau = "/DashBroard/Quanlytau/quanlytau.fxml";
+        String FXMLPATH_quanlytau = "/DashBoard/Quanlytau/quanlytau.fxml";
         try {
             Show_Window showWindow = new Show_Window();
             showWindow.Show(FXMLPATH_quanlytau);
@@ -561,7 +561,7 @@ public class DashBoardController implements Initializable {
     @FXML
     void Switch_xemKhachhang(MouseEvent event) throws IOException {
         stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        String FXMLPATH_quanlykhachhang = "/DashBroard/QuanlyKhachhang/quanlyKhachhang.fxml";
+        String FXMLPATH_quanlykhachhang = "/DashBoard/QuanlyKhachhang/quanlyKhachhang.fxml";
         try {
             Show_Window showWindow = new Show_Window();
             showWindow.Show(FXMLPATH_quanlykhachhang);

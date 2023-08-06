@@ -132,7 +132,7 @@ public class InformationPassengerController implements Initializable {
                     inforButton.setOnAction(event -> {
                         Passenger customerInformation = getTableView().getItems().get(getIndex());
                         ID_Customer = customerInformation.getID_Passenger();
-                        String FXMLPATH = "/DashBroard/InformationView/Information_passenger.fxml";
+                        String FXMLPATH = "/DashBoard/InformationView/Information_passenger.fxml";
                         try {
                             Show_Window showWindow = new Show_Window();
                             showWindow.Show(FXMLPATH);
@@ -233,7 +233,7 @@ public class InformationPassengerController implements Initializable {
     @FXML
     void Switch_quanlytau(MouseEvent event) throws IOException {
         stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        String FXMLPATH_quanlytau = "/DashBroard/Quanlytau/quanlytau.fxml";
+        String FXMLPATH_quanlytau = "/DashBoard/Quanlytau/quanlytau.fxml";
         try {
             Show_Window showWindow = new Show_Window();
             showWindow.Show(FXMLPATH_quanlytau);
@@ -247,7 +247,7 @@ public class InformationPassengerController implements Initializable {
     void Switch_train_form(MouseEvent event) throws IOException {
         stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-        String FXMLPATH_quanlychuyentau = "/DashBroard/dashboard.fxml";
+        String FXMLPATH_quanlychuyentau = "/DashBoard/dashboard.fxml";
         try {
             Show_Window showWindow = new Show_Window();
             showWindow.Show(FXMLPATH_quanlychuyentau);

@@ -233,7 +233,7 @@ public class MainController {
                      alert.showAndWait();
                     signin_btn_login.getScene().getWindow().hide();
 
-                    Parent root1 = FXMLLoader.load(getClass().getResource("/DashBroard/dashboard.fxml"));
+                    Parent root1 = FXMLLoader.load(getClass().getResource("/DashBoard/dashboard.fxml"));
 
                     Stage stage = new Stage();
                     Scene scene = new Scene(root1);
