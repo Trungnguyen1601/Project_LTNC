@@ -1,10 +1,8 @@
 package com.example.vetau.TableView.QuanLyTau;
 
-import com.example.vetau.Show.Button_Extend;
 import com.example.vetau.Show.Show_Window;
 import com.example.vetau.helpers.Database;
 import com.example.vetau.models.ChitietTau;
-import com.example.vetau.models.Passenger;
 import com.example.vetau.models.Tau;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -110,7 +108,6 @@ public class QuanLyTauController implements Initializable {
     Tau tau = null;
     Stage stage_dashbroard = new Stage();
     ObservableList<ChitietTau> TauList = FXCollections.observableArrayList();
-    ObservableList<Button_Extend> Button_List = FXCollections.observableArrayList();
     @FXML
     void Clear_Click(MouseEvent event) {
         tau_id_combobox.setValue(null);
