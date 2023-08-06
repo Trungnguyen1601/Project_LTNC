@@ -22,4 +22,6 @@ module com.example.vetau {
 
     opens com.example.vetau.TableView.QuanLyTau.ThemTau to javafx.fxml;
     exports com.example.vetau.TableView.QuanLyTau.ThemTau;
+    exports com.example.vetau.Password;
+    opens com.example.vetau.Password to javafx.fxml;
 }
