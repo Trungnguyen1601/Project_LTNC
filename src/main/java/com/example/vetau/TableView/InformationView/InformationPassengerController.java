@@ -201,7 +201,8 @@ public class InformationPassengerController implements Initializable {
                 throw new RuntimeException(e);
             }
         } else {
-            refreshTable();
+            //refreshTable();
+            alert.close();
         }
     }
 

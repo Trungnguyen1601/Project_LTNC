@@ -4,21 +4,23 @@ public class Tau {
     private String IDTau;
     private int Soluongtoa;
 
-    public Tau(String IDTau, int soluongtoa, String trangthai) {
+
+    public Tau(String IDTau, int soluongtoa, boolean trangthai) {
         this.IDTau = IDTau;
         Soluongtoa = soluongtoa;
         Trangthai = trangthai;
     }
 
-    private String Trangthai;
-
-    public String getTrangthai() {
+    public boolean isTrangthai() {
         return Trangthai;
     }
 
-    public void setTrangthai(String trangthai) {
+    public void setTrangthai(boolean trangthai) {
         Trangthai = trangthai;
     }
+
+    private boolean Trangthai;
+
 
     public Tau()
     {

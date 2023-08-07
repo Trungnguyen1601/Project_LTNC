@@ -89,7 +89,7 @@
             <center>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <children>
-                        <AnchorPane fx:id="QuanlychitietTau_form" layoutX="40.0" layoutY="66.0" prefHeight="584.0" prefWidth="857.6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="QuanlychitietTau_form" layoutX="40.0" layoutY="66.0" prefHeight="584.0" prefWidth="857.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <AnchorPane layoutX="4.0" prefHeight="674.0" prefWidth="281.0" styleClass="bg-white" stylesheets="@../DesignDashBroard.css">
                                     <children>
@@ -135,7 +135,7 @@
                                                 <Font name="System Bold" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Button layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#Switch_Quanlytau" text="Quản lý tàu" />
+                                        <Button layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#Switch_Quanlytau" styleClass="search_btn" stylesheets="@../DesignDashBroard.css" text="Quản lý tàu" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane layoutX="293.0" layoutY="-4.0" prefHeight="587.0" prefWidth="822.0" style="-fx-background-color: #ffd5d3;" styleClass="bg-white" stylesheets="@../DesignDashBroard.css">
@@ -153,19 +153,26 @@
                                         <FontAwesomeIcon glyphName="SEARCH" layoutX="34.0" layoutY="27.0" size="1.5em" text="" />
                                         <Label fx:id="chucnang_id" layoutX="460.0" layoutY="12.0" />
                                         <FontAwesomeIcon glyphName="REFRESH" layoutX="806.0" layoutY="29.0" onMouseClicked="#Refresh_click_chitietTau" size="2em" />
+                              <FontAwesomeIcon glyphName="EDIT" layoutX="774.0" layoutY="29.0" onMouseClicked="#Edit_Status_ToaTau" size="2em" />
                                     </children>
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="QuanlyTau_form" prefHeight="684.0" prefWidth="1145.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="QuanlyTau_form" prefHeight="684.0" prefWidth="1145.6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <AnchorPane prefHeight="685.0" prefWidth="296.0" styleClass="bg-white" stylesheets="@../DesignDashBroard.css">
                                     <children>
                                         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#Switch_Quanlychitiettau" styleClass="update_btn" stylesheets="@../DesignDashBroard.css" text="Quản lý chi tiết tàu" />
-                                        <Label layoutX="119.0" layoutY="57.0" text="Tìm kiếm tàu" />
+                                        <Label layoutX="100.0" layoutY="55.0" text="Tìm kiếm tàu">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font></Label>
                                         <ComboBox fx:id="tau_id_combobox1" layoutX="99.0" layoutY="88.0" prefWidth="150.0" />
                                         <ComboBox fx:id="trangthai_combobox" layoutX="99.0" layoutY="141.0" prefWidth="150.0" />
-                                        <Label layoutX="128.0" layoutY="403.0" text="Thêm tàu" />
+                                        <Label layoutX="116.0" layoutY="390.0" text="Thêm tàu">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font></Label>
                                         <TextField fx:id="ten_tau_text_id" layoutX="99.0" layoutY="432.0" />
                                         <TextField fx:id="soluongtoa_tau_text_id" layoutX="97.0" layoutY="474.0" />
                                         <Button layoutX="58.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#Search_Click_tau" prefHeight="55.0" prefWidth="76.0" styleClass="search_btn" stylesheets="@../DesignDashBroard.css" text="Search" />
@@ -182,7 +189,7 @@
                                 </AnchorPane>
                                 <AnchorPane layoutX="293.0" prefHeight="687.0" prefWidth="852.0" styleClass="bg-white" stylesheets="@../DesignDashBroard.css">
                                     <children>
-                                        <TableView fx:id="Tau_TableView" layoutY="38.0" prefHeight="645.0" prefWidth="858.0" stylesheets="@../DesignDashBroard.css">
+                                        <TableView fx:id="Tau_TableView" layoutY="48.0" prefHeight="636.0" prefWidth="858.0" stylesheets="@../DesignDashBroard.css">
                                             <columns>
                                                 <TableColumn fx:id="ID_Tau_tau_col" prefWidth="248.80001831054688" text="Tên tàu" />
                                                 <TableColumn fx:id="Soluongtoa_tau_col" prefWidth="180.0" text="Số lượng toa" />
@@ -192,7 +199,12 @@
                               <TextField fx:id="search_tau_txt1" alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="32.0" prefWidth="230.0" promptText="Search" styleClass="search" stylesheets="@../DesignDashBroard.css" />
                               <FontAwesomeIcon glyphName="SEARCH" layoutX="22.0" layoutY="28.0" size="1.5em" text="" />
                               <Label fx:id="chucnang_id1" />
-                              <FontAwesomeIcon glyphName="REFRESH" layoutX="819.0" layoutY="30.0" onMouseClicked="#Refresh_click_chitietTau" size="2em" />
+                              <FontAwesomeIcon glyphName="REFRESH" layoutX="819.0" layoutY="30.0" onMouseClicked="#Refresh_click_TauTableView" size="2em" />
+                              <FontAwesomeIcon glyphName="EDIT" layoutX="788.0" layoutY="31.0" onMouseClicked="#Eidt_Status_Tau" size="2em" wrappingWidth="12.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </FontAwesomeIcon>
                                     </children>
                                 </AnchorPane>
                             </children>

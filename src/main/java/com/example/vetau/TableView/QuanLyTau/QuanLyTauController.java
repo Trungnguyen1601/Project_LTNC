@@ -1,9 +1,12 @@
 package com.example.vetau.TableView.QuanLyTau;
 
+import com.example.vetau.Show.EditableCheckBox;
 import com.example.vetau.Show.Show_Window;
+import com.example.vetau.helpers.Check_Status;
 import com.example.vetau.helpers.Database;
 import com.example.vetau.models.ChitietTau;
 import com.example.vetau.models.Tau;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -113,7 +116,7 @@ public class QuanLyTauController implements Initializable {
     @FXML
     private TableView<Tau> Tau_TableView;
     @FXML
-    private TableColumn<Tau, String> Trangthai_tau_col;
+    private TableColumn<Tau, Boolean> Trangthai_tau_col;
 
     @FXML
     private ComboBox<Tau> tau_id_combobox1;
@@ -126,10 +129,13 @@ public class QuanLyTauController implements Initializable {
     private TextField soluongtoa_tau_text_id;
     @FXML
     private TextField trangthai_tau_text_id;
+    @FXML
+    private TableColumn<ChitietTau, Boolean> trangthai_toa_col;
 
 
     // Biến cho Chức năng chung
     Alert alert = null;
+    public static boolean flag_for_alertInformation = false;
 
 
     String query = null;
@@ -138,6 +144,7 @@ public class QuanLyTauController implements Initializable {
     Statement statement = null;
     ResultSet resultSet = null;
     Tau tau = null;
+    String Trangthai = null;
 
     public static ChitietTau chitietTau_Add = new ChitietTau();
 
@@ -157,6 +164,10 @@ public class QuanLyTauController implements Initializable {
         tau_id_combobox.setValue(null);
         Toa_id_combobox.setValue(null);
         Loaitoa_id_combobox.setValue(null);
+    }
+    @FXML
+    void Edit_Status_ToaTau(MouseEvent event) {
+        flag_for_alertInformation = true;
     }
 
     @FXML
@@ -258,6 +269,8 @@ public class QuanLyTauController implements Initializable {
         Toa_col.setCellValueFactory(new PropertyValueFactory<>("ID_toa"));
         Soluongghe_ct_col.setCellValueFactory(new PropertyValueFactory<>("Soluongghe"));
         loaitoa_ct_col.setCellValueFactory(new PropertyValueFactory<>("Loaitoa"));
+        trangthai_toa_col.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isTrangthai()));
+        trangthai_toa_col.setCellFactory(column -> new EditableCheckBox<>());
 
     }
 
@@ -270,7 +283,8 @@ public class QuanLyTauController implements Initializable {
                 "    toa_tau.ID_Toatau as Toa,\n" +
                 "    toa_tau.Loaitoa as loaitoa,\n" +
                 "    toa_tau.Soluongghe as SLghe,\n" +
-                "    tau.Soluongtoa as soluongtoa\n" +
+                "    tau.Soluongtoa as soluongtoa,\n" +
+                "    toa_tau.Trangthai as trangthai\n" +
                 "FROM toa_tau\n" +
                 "INNER JOIN tau ON tau.ID_Tau = toa_tau.ID_Tau ";
         try {
@@ -279,11 +293,13 @@ public class QuanLyTauController implements Initializable {
             while (resultSet.next())
             {
                 tau = new Tau(resultSet.getString("ID_tau"),resultSet.getInt("soluongtoa"));
-
+                Trangthai = resultSet.getString("trangthai");
+                boolean check = Check_Status.ReturnBoolean_Check(Trangthai);
                 ChitietTauList.add(new ChitietTau(tau,
                         resultSet.getString("Toa"),
                         resultSet.getInt("SLghe"),
-                        resultSet.getString("loaitoa"))
+                        resultSet.getString("loaitoa"),
+                        check)
                 );
 
 
@@ -494,9 +510,11 @@ public class QuanLyTauController implements Initializable {
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
+                String Trangthai = resultSet.getString("Trangthai");
+                boolean check = Check_Status.ReturnBoolean_Check(Trangthai);
                 tau = new Tau(resultSet.getString("ID_Tau"),
                         resultSet.getInt("Soluongtoa"),
-                        resultSet.getString("Trangthai"));
+                        check);
                 TauList.add(tau);
             }
         } catch (SQLException e) {
@@ -512,7 +530,9 @@ public class QuanLyTauController implements Initializable {
         combobox_trangthai(trangthai_combobox);
         ID_Tau_tau_col.setCellValueFactory(new PropertyValueFactory<>("IDTau"));
         Soluongtoa_tau_col.setCellValueFactory(new PropertyValueFactory<>("Soluongtoa"));
-        Trangthai_tau_col.setCellValueFactory(new PropertyValueFactory<>("Trangthai"));
+        Trangthai_tau_col.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isTrangthai()));
+        Trangthai_tau_col.setCellFactory(column -> new EditableCheckBox<>());
+        flag_for_alertInformation = false;
 
     }
 
@@ -533,6 +553,14 @@ public class QuanLyTauController implements Initializable {
         soluongtoa_tau_text_id.setText(null);
     }
 
+    @FXML
+    void Edit_Status_Tau(MouseEvent event) {
+        flag_for_alertInformation = true;
+    }
+    @FXML
+    void Refresh_click_TauTableView(MouseEvent event) {
+
+    }
     @FXML
     void Insert_click_Tau(MouseEvent event) throws SQLException {
         if ((ten_tau_text_id.getText().isEmpty()) || (soluongtoa_tau_text_id.getText().isEmpty()) )
@@ -600,9 +628,11 @@ public class QuanLyTauController implements Initializable {
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next())
             {
+                Trangthai = resultSet.getString("Trangthai");
+                boolean check = Check_Status.ReturnBoolean_Check(Trangthai);
                 tau = new Tau(resultSet.getString("ID_Tau"),
                         resultSet.getInt("Soluongtoa"),
-                        resultSet.getString("Trangthai"));
+                        check);
                 TauList.add(tau);
             }
         } catch (SQLException e) {
@@ -737,6 +767,7 @@ public class QuanLyTauController implements Initializable {
         loadData_Tau();
         Button_Extend_ChitietTau();
         Button_Extend_Tau();
+
 
     }
 }

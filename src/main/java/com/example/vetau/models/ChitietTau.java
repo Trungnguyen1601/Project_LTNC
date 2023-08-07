@@ -7,13 +7,21 @@ public class ChitietTau {
     private String ID_toa;
     private int Soluongghe;
     private String Loaitoa;
-    private String Trangthai;
+    private boolean Trangthai;
 
-    public String getTrangthai() {
+    public boolean isTrangthai() {
         return Trangthai;
     }
 
-    public void setTrangthai(String trangthai) {
+    public void setTrangthai(boolean trangthai) {
+        Trangthai = trangthai;
+    }
+
+    public ChitietTau(Tau tau, String ID_toa, int soluongghe, String loaitoa, boolean trangthai) {
+        this.tau = tau;
+        this.ID_toa = ID_toa;
+        Soluongghe = soluongghe;
+        Loaitoa = loaitoa;
         Trangthai = trangthai;
     }
 
