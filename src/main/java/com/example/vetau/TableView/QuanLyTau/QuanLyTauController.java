@@ -33,9 +33,6 @@ public class QuanLyTauController implements Initializable {
     private TableColumn<ChitietTau, Button> Delete_col;
 
     @FXML
-    private TableColumn<ChitietTau, Button> Detail_col;
-
-    @FXML
     private TableColumn<ChitietTau, String> ID_Tau_col;
 
     @FXML
@@ -149,7 +146,6 @@ public class QuanLyTauController implements Initializable {
         Soluongghe_col.setCellValueFactory(new PropertyValueFactory<>("Soluongghe"));
         loaitoa_col.setCellValueFactory(new PropertyValueFactory<>("Loaitoa"));
         Delete_col.setCellValueFactory(new PropertyValueFactory<>("Delete_btn"));
-        Detail_col.setCellValueFactory(new PropertyValueFactory<>("Detail_btn"));
         Update_col.setCellValueFactory(new PropertyValueFactory<>("Update_btn"));
         Delete_col.setCellFactory(param -> new TableCell<>() {
             Button deleteButton = new Button("Xóa");
@@ -181,7 +177,7 @@ public class QuanLyTauController implements Initializable {
 
                     UpdateButton.setOnAction(event -> {
                         ChitietTau tau = getTableView().getItems().get(getIndex());
-                        String FXMLPATH = "/DashBoard/InformationView/Information_train.fxml";
+                        String FXMLPATH = "/DashBoard/Quanlytau/Edit_train/Edit_train.fxml";
                         try {
                             Show_Window showWindow =new Show_Window();
                             showWindow.Show(FXMLPATH);

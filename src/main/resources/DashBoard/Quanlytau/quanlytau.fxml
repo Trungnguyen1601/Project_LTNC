@@ -139,10 +139,9 @@
                                                 <TableColumn fx:id="ID_Tau_col" prefWidth="162.39996337890625" text="ID_Tau" />
                                                 <TableColumn fx:id="Toa_col" prefWidth="153.60006713867188" text="Toa" />
                                                 <TableColumn fx:id="Soluongghe_col" prefWidth="124.0" text="Số lượng ghế" />
-                                                <TableColumn fx:id="loaitoa_col" prefWidth="98.0" text="Loại Toa" />
-                                    <TableColumn fx:id="Detail_col" prefWidth="174.0" text="Detail" />
-                                    <TableColumn fx:id="Update_col" prefWidth="63.0" />
-                                    <TableColumn fx:id="Delete_col" prefWidth="67.0" />
+                                                <TableColumn fx:id="loaitoa_col" prefWidth="145.0" text="Loại Toa" />
+                                    <TableColumn fx:id="Update_col" prefWidth="130.0" />
+                                    <TableColumn fx:id="Delete_col" prefWidth="133.0" />
                                             </columns>
                                         </TableView>
                                         <TextField fx:id="search_tau_txt" alignment="CENTER" layoutX="26.0" layoutY="4.0" prefHeight="32.0" prefWidth="230.0" promptText="Search" styleClass="search" stylesheets="@../DesignDashBoard.css" AnchorPane.topAnchor="5.0" />

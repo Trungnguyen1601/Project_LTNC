@@ -48,15 +48,11 @@ public class EditTrainController implements Initializable {
     @FXML
     void Loaitoa_Combo_edit(MouseEvent event) {
         try {
-
             query = "SELECT DISTINCT Loaitoa FROM toa_tau";
-
             preparedStatement = connection.prepareStatement(query);
-
             // Lấy dữ liệu từ cơ sở dữ liệu và thêm vào combobox
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-//                    System.out.println(resultSet.getInt("idTau"));
                 String loaitoa = resultSet.getString("Loaitoa");
 
                 Loaitoa_editTau_combo.getItems().add(loaitoa);
@@ -109,7 +105,7 @@ public class EditTrainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        connection = Database.connectionDB();
+        connection = Database.connectionDB();
 //        chitietTau_Update = QuanLyTauController.Get_ChitietTau_Update();
 //        String tau_update = chitietTau_Update.getID_Tau();
 //        String toa_update = chitietTau_Update.getID_toa();
