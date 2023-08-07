@@ -198,3 +198,19 @@
     -fx-background-color:#c2e7ffff;
 }
 
+.combo-box {
+    -fx-border-width: 0.5px;
+    -fx-border-color: #ACACAC;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-font-size: 13px;
+
+}
+
+.combo-box :hover {
+    -fx-text-fill: black;
+}
+
+.combo-box :focused {
+    -fx-text-fill: black;
+}

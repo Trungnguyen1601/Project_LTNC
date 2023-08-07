@@ -89,22 +89,22 @@
                      <children>
                         <AnchorPane layoutX="4.0" prefHeight="674.0" prefWidth="281.0" styleClass="bg-white" stylesheets="@DesignDashBoard.css">
                            <children>
-                              <Label layoutX="25.0" layoutY="89.0" stylesheets="@DesignDashBoard.css" text="Ga đi">
+                              <Label layoutX="25.0" layoutY="69.0" stylesheets="@DesignDashBoard.css" text="Ga đi">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="17.0" layoutY="159.0" text="Ga đến">
+                              <Label layoutX="17.0" layoutY="147.0" text="Ga đến">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="28.0" layoutY="224.0" text="Tàu">
+                              <Label layoutX="29.0" layoutY="217.0" text="Tàu">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tau_id" layoutX="75.0" layoutY="216.0" prefHeight="31.0" prefWidth="190.0" styleClass="add_textfield" stylesheets="@DesignDashBoard.css" />
+                              <TextField fx:id="tau_id" layoutX="78.0" layoutY="209.0" prefHeight="31.0" prefWidth="190.0" styleClass="add_textfield" stylesheets="@DesignDashBoard.css" />
                               <TextField fx:id="giodi_id" layoutX="75.0" layoutY="368.0" prefHeight="31.0" prefWidth="189.0" styleClass="add_textfield" stylesheets="@DesignDashBoard.css" />
                               <Button fx:id="insert_btn_id" layoutX="16.0" layoutY="536.0" mnemonicParsing="false" onAction="#Add_train" prefHeight="45.0" prefWidth="75.0" styleClass="insert_btn" stylesheets="@DesignDashBoard.css" text="Insert" />
                               <Button fx:id="update_btn_id" layoutX="98.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#Refresh_click" prefHeight="45.0" prefWidth="75.0" styleClass="update_btn" stylesheets="@DesignDashBoard.css" text="Refresh" />
@@ -127,11 +127,11 @@
                               </Label>
                               <DatePicker fx:id="Ngaydi_id" layoutX="75.0" layoutY="283.0" prefHeight="34.0" prefWidth="189.0" />
                               <DatePicker fx:id="Ngayden_id" layoutX="75.0" layoutY="446.0" prefHeight="34.0" prefWidth="190.0" />
-                              <ComboBox fx:id="gadi_id_combox" layoutX="75.0" layoutY="84.0" onMouseClicked="#GetValue_Gadi" prefHeight="24.0" prefWidth="190.0" />
-                              <ComboBox fx:id="gaden_id_combox" layoutX="75.0" layoutY="154.0" onMouseClicked="#GetValue_Gaden" prefHeight="24.0" prefWidth="189.0" />
+                              <ComboBox fx:id="gadi_id_combox" layoutX="78.0" layoutY="59.0" onMouseClicked="#GetValue_Gadi" prefHeight="36.0" prefWidth="190.0" />
+                              <ComboBox fx:id="gaden_id_combox" layoutX="76.0" layoutY="137.0" onMouseClicked="#GetValue_Gaden" prefHeight="36.0" prefWidth="189.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="293.0" layoutY="-4.0" prefHeight="587.0" prefWidth="822.0" styleClass="bg-white" stylesheets="@DesignDashBoard.css">
+                        <AnchorPane layoutX="293.0" layoutY="-4.0" prefHeight="587.0" prefWidth="822.0" style="-fx-background-color: #ffd5d3;" styleClass="bg-white" stylesheets="@DesignDashBoard.css">
                            <children>
                               <TableView fx:id="Train_table" layoutX="3.0" layoutY="7.0" prefHeight="664.0" prefWidth="819.0" stylesheets="@DesignDashBoard.css">
                                  <columns>

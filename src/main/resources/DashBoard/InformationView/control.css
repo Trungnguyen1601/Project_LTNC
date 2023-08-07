@@ -119,10 +119,10 @@
 }
 
 .combo-box :hover {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .combo-box :focused {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
