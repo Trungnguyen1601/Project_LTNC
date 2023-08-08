@@ -1,5 +1,6 @@
 package com.example.vetau.Main;
 
+import com.example.vetau.Show.Show_Window;
 import com.example.vetau.helpers.Database;
 import com.example.vetau.helpers.RandomString;
 import javafx.event.ActionEvent;
@@ -277,9 +278,18 @@ public class MainController {
         Stage stage = (Stage) signin_form.getScene().getWindow();
         stage.setIconified(true);
     }
-    public void signup_close()
+    public void signup_close(MouseEvent event)
     {
-        System.exit(1);
+        stage_main =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+        String FXMLPATH_login = "/Main/login-view.fxml";
+        try {
+            Show_Window showWindow = new Show_Window();
+            showWindow.Show(FXMLPATH_login);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage_main.close();
     }
     public void signup_minimize()
     {

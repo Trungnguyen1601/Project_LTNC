@@ -66,8 +66,8 @@
             <children>
             <AnchorPane layoutX="-222.0" layoutY="-516.0" prefHeight="1097.0" prefWidth="737.0" rotate="51.4" style="-fx-background-color: #ffd5d3;">
                <children>
-                      <FontAwesomeIcon glyphName="USER_PLUS" layoutX="516.0" layoutY="388.0" rotate="-50.0" selectionFill="#efeaea" size="8em" text="" />
-                      <Label layoutX="581.0" layoutY="385.0" rotate="-50.0" text="Sign Up">
+                      <FontAwesomeIcon glyphName="USER_PLUS" layoutX="533.0" layoutY="400.0" rotate="-50.0" selectionFill="#efeaea" size="8em" text="" />
+                      <Label layoutX="600.0" layoutY="411.0" rotate="-50.0" text="Sign Up">
                           <font>
                               <Font size="24.0" />
                           </font>
@@ -90,7 +90,7 @@
                 <Hyperlink fx:id="signup_hyber_alreadyaccount" layoutX="342.0" layoutY="565.0" onAction="#switchForm" styleClass="hyberlink" stylesheets="@login.css" text="Already have a account" />
                 <TextField fx:id="signup_cccd" layoutX="520.0" layoutY="254.0" prefHeight="30.0" prefWidth="220.0" promptText="CCCD" styleClass="textfield" stylesheets="@login.css" />
                 <TextField fx:id="signup_gioitinh" layoutX="520.0" layoutY="344.0" prefHeight="30.0" prefWidth="220.0" promptText="Giới tính" styleClass="textfield" stylesheets="@login.css" />
-                <Button fx:id="signup_close" layoutX="750.0" layoutY="2.0" mnemonicParsing="false" onAction="#signup_close" prefHeight="24.0" prefWidth="51.0" styleClass="close" stylesheets="@login.css" textFill="#d11d1d">
+                <Button fx:id="signup_close" layoutX="750.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#signup_close" prefHeight="24.0" prefWidth="51.0" styleClass="close" stylesheets="@login.css" textFill="#d11d1d">
                     <graphic>
                         <FontAwesomeIcon glyphName="CLOSE" />
                     </graphic>
