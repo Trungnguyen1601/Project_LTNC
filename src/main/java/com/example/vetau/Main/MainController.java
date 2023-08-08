@@ -210,6 +210,9 @@ public class MainController {
     public void signin()
     {
         String sql = "SELECT * FROM account_user WHERE Username = ? and Password = ?";
+        String Admin_Controller = "/DashBroard/dashbroard.fxml";
+        String Khachhang_Controller = null;
+        String Role_Controller = null;
         connection = Database.connectionDB();
         try{
             preparedStatement = connection.prepareStatement(sql);
@@ -228,6 +231,7 @@ public class MainController {
             }else{
                 if (resultSet.next())
                 {
+                    String Role = resultSet.getString("Role");
                      alert = new Alert(Alert.AlertType.INFORMATION);
                      alert.setTitle("Information Message");
                      alert.setHeaderText(null);
@@ -235,7 +239,16 @@ public class MainController {
                      alert.showAndWait();
                     signin_btn_login.getScene().getWindow().hide();
 
-                    Parent root1 = FXMLLoader.load(getClass().getResource("/DashBroard/dashbroard.fxml"));
+                    if (Role.equals("KH"))
+                    {
+                        Role_Controller = Khachhang_Controller;
+                    }
+                    else
+                    {
+                        Role_Controller = Admin_Controller;
+                    }
+
+                    Parent root1 = FXMLLoader.load(getClass().getResource(Role_Controller));
 
                     Stage stage = new Stage();
                     Scene scene = new Scene(root1);

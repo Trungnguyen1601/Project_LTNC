@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -21,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -66,6 +68,7 @@ public class QuanLyTauController implements Initializable {
 
     @FXML
     private Button dashbroard_form_btn;
+    private Button Edit_Status_ToaTau_btn;
 
     @FXML
     private Button insert_btn_id;
@@ -259,7 +262,28 @@ public class QuanLyTauController implements Initializable {
         stage_dashbroard.show();
         stage_quanlytau.close();
     }
+    private void TooltipForButton()
+    {
+        Edit_Status_ToaTau_btn = new Button("Cho phép chỉnh sửa");
 
+        // Tạo Tooltip tùy chỉnh với thông tin tên nút
+        Tooltip tooltip = new Tooltip("This is a button");
+        tooltip.setAutoHide(false);
+        tooltip.setHideDelay(Duration.INDEFINITE);
+        Tooltip.install(Edit_Status_ToaTau_btn, tooltip);
+
+        // Đặt vị trí hiển thị Tooltip bên dưới nút
+        Edit_Status_ToaTau_btn.setOnMouseEntered(event -> {
+            Bounds bounds = Edit_Status_ToaTau_btn.localToScreen(Edit_Status_ToaTau_btn.getBoundsInLocal());
+            double x = bounds.getMinX();
+            double y = bounds.getMaxY();
+            tooltip.show(Edit_Status_ToaTau_btn, x, y);
+        });
+
+        Edit_Status_ToaTau_btn.setOnMouseExited(event -> {
+            tooltip.hide();
+        });
+    }
     public void loadData_ChitietTau()
     {
         RefreshTable_ChitietTau();
@@ -767,7 +791,7 @@ public class QuanLyTauController implements Initializable {
         loadData_Tau();
         Button_Extend_ChitietTau();
         Button_Extend_Tau();
-
+        TooltipForButton();
 
     }
 }

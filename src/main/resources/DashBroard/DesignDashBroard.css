@@ -199,3 +199,15 @@
 .centered-tableview {
     -fx-alignment: center; /* Căn lề nội dung theo chiều ngang (trục chính) */
 }
+.Edit_btn{
+    -fx-background-color:#ffffff;
+    -fx-background-radius:8px;
+    -fx-text-fill: #fff;
+    -fx-font-size : 14px;
+    -fx-cursor:hand;
+}
+
+.Edit_btn:hover{
+    -fx-background-color:#c242be;
+}
+
