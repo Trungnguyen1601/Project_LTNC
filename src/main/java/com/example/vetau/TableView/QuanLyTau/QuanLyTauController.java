@@ -44,9 +44,6 @@ public class QuanLyTauController implements Initializable {
     private TableColumn<ChitietTau,Integer> Soluongghe_ct_col;
 
     @FXML
-    private TextField Soluongtoa_id;
-
-    @FXML
     private TableView<ChitietTau> chitietTauTableView;
 
     @FXML
@@ -54,7 +51,13 @@ public class QuanLyTauController implements Initializable {
 
     @FXML
     private ComboBox<String> Toa_id_combobox;
+    @FXML
+    private ComboBox<String> Loaitoa_id_combobox_for_themtoa;
+    @FXML
+    private ComboBox<Tau> tau_id_combobox_for_themtoa;
 
+    @FXML
+    private TextField SLGhe_text_for_themtoa;
     @FXML
     private TableColumn<ChitietTau, Button> Update_col;
 
@@ -69,7 +72,7 @@ public class QuanLyTauController implements Initializable {
 
     @FXML
     private Button dashbroard_form_btn;
-    private Button Edit_Status_ToaTau_btn;
+    public Button Edit_Status_ToaTau_btn;
 
     @FXML
     private Button insert_btn_id;
@@ -98,8 +101,7 @@ public class QuanLyTauController implements Initializable {
     @FXML
     private Button signout_btn;
 
-    @FXML
-    private TextField tau_add_id;
+
 
     @FXML
     private ComboBox<Tau> tau_id_combobox;
@@ -184,43 +186,45 @@ public class QuanLyTauController implements Initializable {
         loadData_ChitietTau();
     }
     @FXML
-    void Insert_tau_click_chitietTau(MouseEvent event) throws SQLException {
-
-        if ((tau_add_id.getText().isEmpty()) || (Soluongtoa_id.getText().isEmpty()) )
+    void Insert_toa_click_chitietTau(MouseEvent event) throws SQLException {
+        if((tau_id_combobox_for_themtoa.getValue() == null) || ( SLGhe_text_for_themtoa.getText().isEmpty()) || (Loaitoa_id_combobox_for_themtoa.getValue() == null))
         {
-            alert = new Alert(Alert.AlertType.ERROR);
+            alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Note Message");
             alert.setHeaderText(null);
-            alert.setContentText("Điền đẩy đủ thông tin tàu thêm");
+            alert.setContentText("Vui lòng nhập đủ thông tin toa cần thêm");
             alert.showAndWait();
         }
-
         else {
-
-            String ID_tau = tau_add_id.getText();
-            String SLtoa = Soluongtoa_id.getText();
-            resultSet = Database.SELECT_STRING_FROM_TABLE(connection, "tau", "ID_Tau", ID_tau);
-            if (resultSet.next()) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Note Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Tàu đã tồn tại");
-                alert.showAndWait();
-
+            int SLToa = 0;
+            Tau tau_isAdded = tau_id_combobox_for_themtoa.getValue();
+            String ID_Tau_isAdded_Toa = tau_isAdded.getIDTau();
+            ResultSet rs = Database.SELECT_STRING_FROM_TABLE(connection,"tau","ID_Tau",ID_Tau_isAdded_Toa);
+            if (rs.next()) {
+                SLToa = rs.getInt("Soluongtoa");
+                int ToaAdded = SLToa + 1;
+                Database.UPDATE_Int_DATA_FROM_TABLE(connection,"tau","Soluongtoa",
+                        SLToa+1,"ID_Tau",ID_Tau_isAdded_Toa);
+                String TOA_IsAdded = "TOA" + ToaAdded + tau_isAdded.getIDTau();
+                String Loai_toa_tauisAdded = Loaitoa_id_combobox_for_themtoa.getValue();
+                int SLghe_tauisAdded = Integer.parseInt(SLGhe_text_for_themtoa.getText());
+                query = "INSERT INTO toa_tau (ID_Toatau,ID_Tau,Soluongghe,Loaitoa) VALUES " +
+                        "(?,?,?,?)";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1,TOA_IsAdded);
+                preparedStatement.setString(2,ID_Tau_isAdded_Toa);
+                preparedStatement.setInt(3,SLghe_tauisAdded);
+                preparedStatement.setString(4,Loai_toa_tauisAdded);
+                preparedStatement.executeUpdate();
             }
             else {
-
-
-                Tau tau_insert = new Tau(ID_tau, Integer.parseInt(SLtoa));
-                chitietTau_Add.setTau(tau_insert);
-                String FXMLPATH_Them_tau = "/DashBroard/Quanlytau/ThemTau/themtau.fxml";
-                try {
-                    Show_Window showWindow = new Show_Window();
-                    showWindow.Show(FXMLPATH_Them_tau);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Note Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Không có dữ liệu số lượng toa");
+                alert.showAndWait();
             }
+
         }
 
     }
@@ -292,6 +296,10 @@ public class QuanLyTauController implements Initializable {
         Combobox_tau(tau_id_combobox);
         combobox_loaitoa(Loaitoa_id_combobox);
 
+        Combobox_tau(tau_id_combobox_for_themtoa);
+        combobox_loaitoa(Loaitoa_id_combobox_for_themtoa);
+
+
         ID_Tau_ct_col.setCellValueFactory(new PropertyValueFactory<>("ID_Tau"));
         Toa_col.setCellValueFactory(new PropertyValueFactory<>("ID_toa"));
         Soluongghe_ct_col.setCellValueFactory(new PropertyValueFactory<>("Soluongghe"));
@@ -350,20 +358,13 @@ public class QuanLyTauController implements Initializable {
             // Lấy dữ liệu từ cơ sở dữ liệu và thêm vào combobox
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-//                    System.out.println(resultSet.getInt("idTau"));
                 String ID_Tau = resultSet.getString("ID_Tau");
                 int soluongtoa = resultSet.getInt("Soluongtoa");
-
                 tau = new Tau(ID_Tau,soluongtoa);
-//                tau_id_combobox.getItems().add(tau);
                 comboBox.getItems().add(tau);
             }
 
-            // Xử lý sự kiện khi combobox được chọn
-//            gadi_id_combox.setOnAction(event -> {
-//                String selectedTrain = gadi_id_combox.getValue();
-//
-//            });
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

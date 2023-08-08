@@ -329,6 +329,7 @@ public class DashBroardController implements Initializable {
     }
     public void Add_train()
     {
+
         int MaxSTT = ExtractString.extractNumber(MaxID_Database_chuyentau());
         query = "INSERT INTO chuyen_tau (ID_chuyentau,ID_Gadi, ID_Gaden, ID_Tau, Gio_di,Ngay_di,Ngay_den) VAlUES (?,?,?,?,?,?,?)";
         try {
@@ -514,6 +515,27 @@ public class DashBroardController implements Initializable {
                 ga_tau = new Ga_tau(ID_Gatau,Gatau,Dia_diem);
                 gaden_id_combox.getItems().add(ga_tau);
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void Combobox_tau(ComboBox <Tau> comboBox)
+    {
+        try {
+            Tau tau = null;
+            query = "SELECT *  FROM tau";
+            preparedStatement = connection.prepareStatement(query);
+
+            // Lấy dữ liệu từ cơ sở dữ liệu và thêm vào combobox
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String ID_Tau = resultSet.getString("ID_Tau");
+                int soluongtoa = resultSet.getInt("Soluongtoa");
+                tau = new Tau(ID_Tau,soluongtoa);
+                comboBox.getItems().add(tau);
+            }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
