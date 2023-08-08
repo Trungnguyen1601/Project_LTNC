@@ -3,6 +3,7 @@ package com.example.vetau.models;
 public class Tau {
     private String IDTau;
     private int Soluongtoa;
+    private Tau tau;
     public Tau()
     {
 
@@ -19,6 +20,13 @@ public class Tau {
 
     public void setIDTau(String ID_Tau) {
         this.IDTau = ID_Tau;
+    }
+
+    public void setTau(Tau tau_id) {
+        tau = tau_id;
+    }
+    public Tau getTau() {
+        return tau;
     }
 
     public int getSoluongtoa() {

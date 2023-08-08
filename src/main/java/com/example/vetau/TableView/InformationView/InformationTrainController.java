@@ -7,16 +7,14 @@ import com.example.vetau.models.Tau;
 import com.example.vetau.models.Chuyen_tau;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.*;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class InformationTrainController implements Initializable {
@@ -41,7 +39,6 @@ public class InformationTrainController implements Initializable {
 
     @FXML
     private TextField sotoa_infor_text;
-
     @FXML
     private TextField tentau_infor_text;
 
@@ -98,7 +95,7 @@ public class InformationTrainController implements Initializable {
     ResultSet resultSet = null;
     Chuyen_tau chuyentau = null;
     String Train_id_edit;
-
+    private Alert alert;
     @FXML
     private ComboBox<Ga_tau> gaden_edit_combo;
 
@@ -162,7 +159,6 @@ public class InformationTrainController implements Initializable {
         {
             chuyentau.setNgayden(java.sql.Date.valueOf(ngayden_edit_date.getValue()));
         }
-        System.out.println(tau_edit_combo.getValue().getIDTau());
         query = "UPDATE chuyen_tau \n" +
                 "SET ID_Gadi = ?, \n" +
                 "ID_Gaden = ?,\n " +
@@ -171,19 +167,28 @@ public class InformationTrainController implements Initializable {
                 "Ngay_di = ?, \n" +
                 "Ngay_den = ? \n" +
                 "WHERE ID_Chuyentau = ?";
-        try {
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, chuyentau.getGadi().getID_Gatau());
-            preparedStatement.setString(2, chuyentau.getGaden().getID_Gatau());
-            preparedStatement.setString(3, chuyentau.getTau().getIDTau());
-            preparedStatement.setString(4, chuyentau.getGiodi());
-            preparedStatement.setDate(5,(Date) chuyentau.getNgaydi());
-            preparedStatement.setDate(6, (Date) chuyentau.getNgayden());
-            preparedStatement.setString(7,Train_id_edit);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Error Message");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to change information?");
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get().equals(ButtonType.OK)) {
+            try {
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, chuyentau.getGadi().getID_Gatau());
+                preparedStatement.setString(2, chuyentau.getGaden().getID_Gatau());
+                preparedStatement.setString(3, chuyentau.getTau().getIDTau());
+                preparedStatement.setString(4, chuyentau.getGiodi());
+                preparedStatement.setDate(5,(Date) chuyentau.getNgaydi());
+                preparedStatement.setDate(6, (Date) chuyentau.getNgayden());
+                preparedStatement.setString(7,Train_id_edit);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
         }
+
     }
     public void Combobox_gadi_edit()
     {

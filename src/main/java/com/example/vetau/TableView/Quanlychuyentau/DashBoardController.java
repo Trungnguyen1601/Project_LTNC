@@ -44,11 +44,7 @@ public class DashBoardController implements Initializable {
     @FXML
     private TableColumn<Chuyen_tau, String> gaden_col;
     @FXML
-    private TextField gaden_id;
-    @FXML
     private TableColumn<Chuyen_tau, String> gadi_col;
-    @FXML
-    private TextField gadi_id;
     @FXML
     private TableColumn<Chuyen_tau, String> giodi_col;
     @FXML
@@ -63,8 +59,6 @@ public class DashBoardController implements Initializable {
     private Button signout_btn;
     @FXML
     private TableColumn<Chuyen_tau, String> tau_col;
-    @FXML
-    private TextField tau_id;
     @FXML
     private Button train_form_btn;
     @FXML
@@ -86,12 +80,13 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private TableColumn<Chuyen_tau, LocalDate> ngaydi_col;
-    @FXML
-    private Label chucnang_id;
+
     @FXML
     private ComboBox<Ga_tau> gadi_id_combox;
     @FXML
     private ComboBox<Ga_tau> gaden_id_combox;
+    @FXML
+    private ComboBox<Tau> tau_id_combox;
     // Quản lý khách hàng
     @FXML
     private TextField Addr_passenger_id;
@@ -219,10 +214,10 @@ public class DashBoardController implements Initializable {
         chuyentauList.clear();
         Combobox_gadi();
         Combobox_gaden();
+        Combobox_tau();
         giodi_id.setText(null);
         Ngaydi_id.setValue(null);
         Ngayden_id.setValue(null);
-        tau_id.setText(null);
         try {
             query = "SELECT c.ID_Chuyentau,\n" +
                     "     g1.ID_Gatau as ID_GaDi, g1.Ten_Gatau AS TenGaDi,g1.Dia_diem as DiaDiem_gadi,\n" +
@@ -325,7 +320,7 @@ public class DashBoardController implements Initializable {
             preparedStatement.setString(1,"CT" + (MaxSTT + 1) );
             preparedStatement.setString(2,gadi_id_combox.getValue().getID_Gatau());
             preparedStatement.setString(3,gaden_id_combox.getValue().getID_Gatau());
-            preparedStatement.setString(4,tau_id.getText());
+            preparedStatement.setString(4,tau_id_combox.getValue().getIDTau());
             preparedStatement.setString(5,giodi_id.getText());
             preparedStatement.setDate(6,java.sql.Date.valueOf(Ngaydi_id.getValue()));
             preparedStatement.setDate(7,java.sql.Date.valueOf(Ngayden_id.getValue()));
@@ -338,7 +333,7 @@ public class DashBoardController implements Initializable {
     }
     public void Search_train()
     {
-        String ID_tau = null;
+        String ID_Tau = null;
         Date ndi = null;
         Date nden = null;
         Ga_tau ga_di = new Ga_tau();
@@ -363,9 +358,9 @@ public class DashBoardController implements Initializable {
                 "AND (ngay_di = ? OR ? is null ) " +
                 "AND (ngay_den = ? OR ? is null )";
         connection = Database.connectionDB();
-        if (tau_id.getText() != null && !tau_id.getText().isEmpty())
+        if (tau_id_combox.getValue() != null )
         {
-            ID_tau = tau_id.getText();
+            ID_Tau = tau_id_combox.getValue().getIDTau();
         }
         if (Ngaydi_id.getValue() != null)
         {
@@ -388,8 +383,8 @@ public class DashBoardController implements Initializable {
             preparedStatement.setString(2,ga_di.getID_Gatau());
             preparedStatement.setString(3,ga_den.getID_Gatau());
             preparedStatement.setString(4,ga_den.getID_Gatau());
-            preparedStatement.setString(5,ID_tau);
-            preparedStatement.setString(6,ID_tau);
+            preparedStatement.setString(5,ID_Tau);
+            preparedStatement.setString(6,ID_Tau);
             preparedStatement.setString(7,giodi_id.getText());
             preparedStatement.setString(8,giodi_id.getText());
             preparedStatement.setDate(9, ndi);
@@ -435,7 +430,6 @@ public class DashBoardController implements Initializable {
     }
     @FXML
     void Search_click(MouseEvent event) {
-        chucnang_id.setText("Tìm kiếm thông tin chuyến tàu");
         Search_train();
 
     }
@@ -452,16 +446,12 @@ public class DashBoardController implements Initializable {
     }
     @FXML
     void Clear_Click(MouseEvent event) {
-        gadi_id.setText(null);
-        gaden_id.setText(null);
         giodi_id.setText(null);
         Ngaydi_id.setValue(null);
         Ngayden_id.setValue(null);
-        tau_id.setText(null);
+        tau_id_combox.setValue(null);
         gadi_id_combox.setValue(null);
         gaden_id_combox.setValue(null);
-
-
     }
 
     public void Combobox_gadi()
@@ -488,7 +478,6 @@ public class DashBoardController implements Initializable {
     public void Combobox_gaden()
     {
         try {
-
             Ga_tau ga_tau = null;
             query = "SELECT *  FROM ga_tau";
             preparedStatement = connection.prepareStatement(query);
@@ -507,6 +496,27 @@ public class DashBoardController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void Combobox_tau()
+    {
+        try {
+
+            Tau tau = null;
+            query = "SELECT *  FROM tau";
+            preparedStatement = connection.prepareStatement(query);
+
+            // Lấy dữ liệu từ cơ sở dữ liệu và thêm vào combobox
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String ID_Tau = resultSet.getString("ID_Tau");
+                int Soluongtoa  = resultSet.getInt("Soluongtoa");
+                tau = new Tau(ID_Tau, Soluongtoa);
+                tau_id_combox.getItems().add(tau);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     void GetValue_Gadi(MouseEvent event) {
         chuyentau.setGadi(gadi_id_combox.getValue());
@@ -517,33 +527,10 @@ public class DashBoardController implements Initializable {
         chuyentau.setGaden(gaden_id_combox.getValue());
     }
     @FXML
-    void Clear_passenger_Click(MouseEvent event) {
-
+    void GetValue_Tau(MouseEvent event) {
+        tau.setTau(tau_id_combox.getValue());
     }
 
-    @FXML
-    void Refresh_passenger_click(MouseEvent event) {
-
-    }
-
-
-    @FXML
-    void Search_passenger_click(MouseEvent event) {
-
-    }
-    @FXML
-    void DashBroard_form_click(MouseEvent event) {
-
-    }
-
-    @FXML
-    void Passenger_form_click(MouseEvent event) {
-
-    }
-    @FXML
-    void Train_mangement_form_click(MouseEvent event) {
-
-    }
 
     @FXML
     void Switch_quanlytau(MouseEvent event) throws IOException {

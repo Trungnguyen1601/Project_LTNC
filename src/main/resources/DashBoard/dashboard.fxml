@@ -104,7 +104,6 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="tau_id" layoutX="78.0" layoutY="209.0" prefHeight="31.0" prefWidth="190.0" styleClass="add_textfield" stylesheets="@DesignDashBoard.css" />
                               <TextField fx:id="giodi_id" layoutX="75.0" layoutY="368.0" prefHeight="31.0" prefWidth="189.0" styleClass="add_textfield" stylesheets="@DesignDashBoard.css" />
                               <Button fx:id="insert_btn_id" layoutX="16.0" layoutY="536.0" mnemonicParsing="false" onAction="#Add_train" prefHeight="45.0" prefWidth="75.0" styleClass="insert_btn" stylesheets="@DesignDashBoard.css" text="Insert" />
                               <Button fx:id="update_btn_id" layoutX="98.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#Refresh_click" prefHeight="45.0" prefWidth="75.0" styleClass="update_btn" stylesheets="@DesignDashBoard.css" text="Refresh" />
@@ -129,6 +128,7 @@
                               <DatePicker fx:id="Ngayden_id" layoutX="75.0" layoutY="446.0" prefHeight="34.0" prefWidth="190.0" />
                               <ComboBox fx:id="gadi_id_combox" layoutX="78.0" layoutY="59.0" onMouseClicked="#GetValue_Gadi" prefHeight="36.0" prefWidth="190.0" />
                               <ComboBox fx:id="gaden_id_combox" layoutX="76.0" layoutY="137.0" onMouseClicked="#GetValue_Gaden" prefHeight="36.0" prefWidth="189.0" />
+                              <ComboBox fx:id="tau_id_combox" layoutX="76.0" layoutY="207.0" onMouseClicked="#GetValue_Tau" prefHeight="36.0" prefWidth="189.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="293.0" layoutY="-4.0" prefHeight="587.0" prefWidth="822.0" style="-fx-background-color: #ffd5d3;" styleClass="bg-white" stylesheets="@DesignDashBoard.css">

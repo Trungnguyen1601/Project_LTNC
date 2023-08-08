@@ -104,7 +104,7 @@
                   <TextField fx:id="giodi_edit_text" layoutX="100.0" layoutY="118.0" prefHeight="35.0" prefWidth="209.0" styleClass="add_textfield" stylesheets="@control.css" />
                   <TextField fx:id="soluongtoa_edit_text" layoutX="416.0" layoutY="278.0" prefHeight="35.0" prefWidth="209.0" styleClass="add_textfield" stylesheets="@control.css" />
                   <Button fx:id="OK_edit_btn" layoutX="471.0" layoutY="367.0" mnemonicParsing="false" onMouseClicked="#setOK" prefHeight="46.0" prefWidth="98.0" styleClass="update_btn" stylesheets="@../control.css" text="OK" />
-                  <ComboBox fx:id="tau_edit_combo" layoutX="415.0" layoutY="127.0" prefHeight="35.0" prefWidth="210.0" stylesheets="@control.css" />
+                  <ComboBox fx:id="tau_edit_combo" layoutX="415.0" layoutY="118.0" prefHeight="35.0" prefWidth="210.0" stylesheets="@control.css" />
                   <Label layoutX="32.0" layoutY="59.0" text="Ga đi">
                      <font>
                         <Font name="System Bold Italic" size="14.0" />
@@ -156,7 +156,7 @@
                         <FontAwesomeIcon glyphName="MINUS" />
                      </graphic>
                   </Button>
-                  <FontAwesomeIcon glyphName="INFO" layoutX="172.0" layoutY="56.0" size="3em" />
+                  <FontAwesomeIcon glyphName="INFO" layoutX="180.0" layoutY="50.0" size="2.5em" />
                </children>
             </AnchorPane>
          </children>
