@@ -586,7 +586,7 @@ public class DashBroardController implements Initializable {
     public  void  logout() {
         try {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Error Message");
+            alert.setTitle("Note Message");
             alert.setHeaderText(null);
             alert.setContentText("Are you sure you want to logout?");
             Optional<ButtonType> option = alert.showAndWait();

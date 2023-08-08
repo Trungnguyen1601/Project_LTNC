@@ -4,6 +4,7 @@ import com.example.vetau.Show.EditableCheckBox;
 import com.example.vetau.Show.Show_Window;
 import com.example.vetau.helpers.Check_Status;
 import com.example.vetau.helpers.Database;
+import com.example.vetau.helpers.ExtractString;
 import com.example.vetau.models.ChitietTau;
 import com.example.vetau.models.Tau;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -134,7 +135,7 @@ public class QuanLyTauController implements Initializable {
     private TextField trangthai_tau_text_id;
     @FXML
     private TableColumn<ChitietTau, Boolean> trangthai_toa_col;
-
+    Stage stage_quanlykhachhang = new Stage();
 
     // Biến cho Chức năng chung
     Alert alert = null;
@@ -152,6 +153,7 @@ public class QuanLyTauController implements Initializable {
     public static ChitietTau chitietTau_Add = new ChitietTau();
 
     public static ChitietTau chitiettau_Update = new ChitietTau();
+    public ChitietTau chitietTau_Delete = new ChitietTau();
 
     public static ChitietTau Get_ChitietTau_Update()
     {
@@ -289,6 +291,7 @@ public class QuanLyTauController implements Initializable {
         RefreshTable_ChitietTau();
         Combobox_tau(tau_id_combobox);
         combobox_loaitoa(Loaitoa_id_combobox);
+
         ID_Tau_ct_col.setCellValueFactory(new PropertyValueFactory<>("ID_Tau"));
         Toa_col.setCellValueFactory(new PropertyValueFactory<>("ID_toa"));
         Soluongghe_ct_col.setCellValueFactory(new PropertyValueFactory<>("Soluongghe"));
@@ -476,20 +479,69 @@ public class QuanLyTauController implements Initializable {
     }
 
     @FXML
-    void Switch_xemKhachhang(MouseEvent event) {
+    void Switch_xemKhachhang(MouseEvent event) throws IOException {
+        stage_dashbroard =  (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
+        Parent root2 = FXMLLoader.load(getClass().getResource("/DashBroard/QuanlyKhachhang/quanlyKhachhang.fxml"));
+        Scene scene_quanlykhachhang = new Scene(root2);
+        stage_quanlykhachhang.initStyle(StageStyle.TRANSPARENT);
+        stage_quanlykhachhang.setScene(scene_quanlykhachhang);
+
+        stage_quanlykhachhang.show();
+        stage_dashbroard.close();
     }
 
     @FXML
     void logout(MouseEvent event) {
+        try {
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Note Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to logout?");
+            Optional<ButtonType> option = alert.showAndWait();
 
+            if (option.get().equals(ButtonType.OK)) {
+                /* TO HIDE MAIN FORM */
+                signout_btn.getScene().getWindow().hide();
+                /* LINK YOUR LOGIN FORM AND SHOW IT */
+                Parent root_logout = FXMLLoader.load(getClass().getResource("/Main/login-view.fxml"));
+                Stage stage_logout = new Stage();
+                Scene scene_logout = new Scene(root_logout);
+                stage_logout.initStyle(StageStyle.TRANSPARENT);
+                stage_logout.setScene(scene_logout);
+                stage_logout.show();
+            }
+            else {
+                RefreshTable_Tau();
+                RefreshTable_ChitietTau();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     public static ChitietTau getChitietTau_Add() {
         return chitietTau_Add;
     }
-    private void Delete_in_DBchitiettau(String ID_Tau)
-    {
-        Database.DELETE_String_FROM_TABLE(connection,"tau","ID_Tau",ID_Tau);
+    private void Delete_Toa_in_DBchitiettau(String ID_Toatau) throws SQLException {
+        Database.DELETE_String_FROM_TABLE(connection,"toa_tau","ID_Toatau",ID_Toatau);
+        String ID_Tau_Delete = chitietTau_Delete.getID_Tau();
+        ResultSet rs = Database.SELECT_STRING_FROM_TABLE(connection,"tau","ID_Tau",ID_Tau_Delete);
+        if (rs.next()) {
+            int SLToa = rs.getInt("Soluongtoa");
+            int Index_Start_to_Delete = Integer.parseInt(ExtractString.extractNumber_from_ToaTau(ID_Toatau)) + 1;
+            for (int i = Index_Start_to_Delete; i <= SLToa; i++) {
+                int Index_Start = i - 1;
+                String TOA_UPDATE = "TOA" + Index_Start + ID_Tau_Delete;
+                String TOA_IS_UPDATED = "TOA" + i + ID_Tau_Delete;
+                Database.UPDATE_String_DATA_FROM_TABLE(connection, "toa_tau", "ID_Toatau",
+                        TOA_UPDATE, "ID_Toatau", TOA_IS_UPDATED);
+            }
+            Database.UPDATE_Int_DATA_FROM_TABLE(connection,"tau","Soluongtoa",
+                    SLToa -1,"ID_Tau",ID_Tau_Delete);
+        }
+
+
     }
 
     @FXML
@@ -719,14 +771,19 @@ public class QuanLyTauController implements Initializable {
                         deleteButton.setOnAction(event -> {
 
                             ChitietTau item = getTableView().getItems().get(getIndex());
+                            chitietTau_Delete = item;
                             chitietTauTableView.getItems().remove(item);
                             alert = new Alert(Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("Error Message");
+                            alert.setTitle("Note Message");
                             alert.setHeaderText(null);
                             alert.setContentText("Bạn xác nhận muốn xóa?");
                             Optional<ButtonType> option = alert.showAndWait();
                             if (option.get().equals(ButtonType.OK)) {
-                                Delete_in_DBchitiettau(item.getID_Tau());
+                                try {
+                                    Delete_Toa_in_DBchitiettau(item.getID_toa());
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
                             } else {
                                 RefreshTable_ChitietTau();
                             }

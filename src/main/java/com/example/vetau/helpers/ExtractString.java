@@ -23,10 +23,45 @@ public class ExtractString {
         int STT = extractNumber(ID);
         return STT;
     }
+    public static String extractNumber_from_ToaTau(String input) {
+        int startIndex = -1;
+        int endIndex = -1;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (Character.isDigit(input.charAt(i))) {
+                startIndex = i;
+                break;
+            }
+        }
+
+        if (startIndex != -1) {
+            for (int i = startIndex; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    endIndex = i;
+                    break;
+                }
+            }
+
+            if (endIndex == -1) {
+                endIndex = input.length();
+            }
+
+            return input.substring(startIndex, endIndex);
+        }
+
+        return null;
+    }
 
     public static void main(String[] args) {
         System.out.println(extractNumber("SV19"));
+        String input = "TOA10TAU1";
+        String extractedNumber = extractNumber_from_ToaTau(input);
 
+        if (extractedNumber != null) {
+            System.out.println("Extracted number: " + extractedNumber);
+        } else {
+            System.out.println("No number found in the string.");
+        }
     }
 }
 

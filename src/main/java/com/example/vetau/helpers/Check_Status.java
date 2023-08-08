@@ -3,6 +3,10 @@ package com.example.vetau.helpers;
 public class Check_Status {
     public static boolean ReturnBoolean_Check(String Status)
     {
+        if (Status == null)
+        {
+            return true;
+        }
         boolean flag = true;
        if (Status.equals("Yes"))
        {

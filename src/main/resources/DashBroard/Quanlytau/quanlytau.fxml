@@ -162,11 +162,16 @@
                                               <FontAwesomeIcon glyphName="REFRESH" size="2em" />
                                  </graphic>
                               </Button>
+                              <Label layoutX="445.0" layoutY="6.0" text="Quản lý toa tàu">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
                                     </children>
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="QuanlyTau_form" prefHeight="684.0" prefWidth="1145.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="QuanlyTau_form" prefHeight="684.0" prefWidth="1145.6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <AnchorPane prefHeight="685.0" prefWidth="296.0" styleClass="bg-white" stylesheets="@../DesignDashBroard.css">
                                     <children>
@@ -195,7 +200,7 @@
                               <Label layoutX="30.0" layoutY="525.0" text="Trạng thái" />
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane layoutX="293.0" prefHeight="687.0" prefWidth="852.0" styleClass="bg-white" stylesheets="@../DesignDashBroard.css" visible="false">
+                                <AnchorPane layoutX="293.0" prefHeight="687.0" prefWidth="852.0" styleClass="bg-white" stylesheets="@../DesignDashBroard.css">
                                     <children>
                                         <TableView fx:id="Tau_TableView" layoutY="48.0" prefHeight="636.0" prefWidth="858.0" stylesheets="@../DesignDashBroard.css">
                                             <columns>
@@ -213,6 +218,11 @@
                                     <Font size="18.0" />
                                  </font>
                               </FontAwesomeIcon>
+                              <Label layoutX="443.0" layoutY="7.0" text="Quản lý tàu">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                                     </children>
                                 </AnchorPane>
                             </children>

@@ -1,6 +1,8 @@
 package com.example.vetau.helpers;
 
 
+import javafx.scene.control.Alert;
+
 import java.sql.*;
 
 public class Database {
@@ -93,6 +95,48 @@ public class Database {
 
 
     }
+    public static void UPDATE_String_DATA_FROM_TABLE(Connection connection,String TableName, String ColumnName_Set, String Data,String ColumnName_Where, String row_Data)
+    {
+        String query = null;
+        PreparedStatement preparedStatement = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        query = "UPDATE " + TableName +"\n" +
+                "SET " + ColumnName_Set + " = ?\n" +
+                "WHERE " + ColumnName_Where +" = ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,Data);
+            preparedStatement.setString(2,row_Data);
+            int check = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public static void UPDATE_Int_DATA_FROM_TABLE(Connection connection,String TableName, String ColumnName_Set, int Data,String ColumnName_Where, String row_Data)
+    {
+        String query = null;
+        PreparedStatement preparedStatement = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        query = "UPDATE " + TableName +"\n" +
+                "SET " + ColumnName_Set + " = ?\n" +
+                "WHERE " + ColumnName_Where +" = ?";
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,Data);
+            preparedStatement.setString(2,row_Data);
+            int check = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     static void Insert() throws SQLException {
         Connection connection = Database.connectionDB();
         int count = 0;
@@ -160,42 +204,8 @@ public class Database {
         }
     }
     public static void main(String[] args) {
-//        Connection connection = Database.connectionDB();
-//        String loaitoa = null;
-//        PreparedStatement preparedStatement = null;
-//        String query = "UPDATE toa_tau SET Loaitoa = ? " +
-//                " WHERE (ID_Toatau = ? ) and (ID_Tau = ?)";
-//
-//        for (int i = 1; i<= 5; i++)
-//        {
-//
-//            for (int j = 1; j<=5;j++)
-//            {
-//                if (j <= 3)
-//                {
-//                    loaitoa = "Vip";
-//                }
-//                else {
-//                    loaitoa = "Thuong";
-//                }
-//                try {
-//                    preparedStatement = connection.prepareStatement(query);
-//                    preparedStatement.setString(1,loaitoa);
-//                    preparedStatement.setString(2,"TOA"+j+"TAU"+i);
-//                    preparedStatement.setString(3,"TAU"+i);
-//                    System.out.println("TOA"+i+"TAU"+j + " " + loaitoa);
-//                    preparedStatement.executeUpdate();
-//                } catch (SQLException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
-        try {
-            Update();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        Connection connection = connectionDB();
+        UPDATE_String_DATA_FROM_TABLE(connection,"tau","Trangthai","Yes","ID_Tau","TAU");
 
     }
 }
