@@ -128,7 +128,7 @@ public class InformationTrainController implements Initializable {
     }
 
     @FXML
-    void setOK(MouseEvent event1) {
+    void setOK(MouseEvent event) {
         Combobox_tau_edit();
         Train_id_edit = DashBoardController.getTrain_id();
         if(gadi_edit_combo.getValue() != null)
@@ -186,7 +186,8 @@ public class InformationTrainController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.close();
         }
 
     }
