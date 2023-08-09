@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="810.0" styleClass="bg-form" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vetau.Main.MainController">
     <children>
-        <AnchorPane fx:id="signin_form" layoutX="327.0" prefHeight="650.0" prefWidth="483.0" style="-fx-background-color: d3edff;" stylesheets="@login.css">
+        <AnchorPane fx:id="signin_form" layoutX="327.0" prefHeight="650.0" prefWidth="483.0" style="-fx-background-color: d3edff;" stylesheets="@login.css" visible="false">
             <children>
                 <Button fx:id="signin_close" layoutX="432.0" layoutY="2.0" mnemonicParsing="false" onAction="#signin_close" prefHeight="24.0" prefWidth="51.0" styleClass="close" stylesheets="@login.css">
                <graphic>
@@ -53,7 +53,7 @@
             <FontAwesomeIcon glyphName="LOCK" layoutX="112.0" layoutY="406.0" size="1.6em" />
             </children>
         </AnchorPane>
-      <AnchorPane layoutX="-3.0" prefHeight="650.0" prefWidth="332.0" style="-fx-background-color: #ffd5d3;">
+      <AnchorPane layoutX="-3.0" prefHeight="650.0" prefWidth="332.0" style="-fx-background-color: #ffd5d3;" visible="false">
          <children>
             <ImageView fitHeight="197.0" fitWidth="263.0" layoutX="34.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -62,14 +62,14 @@
             </ImageView>
          </children>
       </AnchorPane>
-        <AnchorPane fx:id="signup_form" prefHeight="650.0" prefWidth="810.0" style="-fx-background-color: #d3edff;" visible="false">
+        <AnchorPane fx:id="signup_form" prefHeight="650.0" prefWidth="810.0" style="-fx-background-color: #d3edff;">
             <children>
-            <AnchorPane layoutX="-222.0" layoutY="-516.0" prefHeight="1097.0" prefWidth="737.0" rotate="51.4" style="-fx-background-color: #ffd5d3;">
+            <AnchorPane layoutX="-217.0" layoutY="-516.0" prefHeight="1097.0" prefWidth="737.0" rotate="51.4" style="-fx-background-color: #ffd5d3;">
                <children>
                       <FontAwesomeIcon glyphName="USER_PLUS" layoutX="533.0" layoutY="400.0" rotate="-50.0" selectionFill="#efeaea" size="8em" text="" />
-                      <Label layoutX="600.0" layoutY="411.0" rotate="-50.0" text="Sign Up">
+                      <Label layoutX="576.0" layoutY="393.0" rotate="-50.0" text="Sign Up">
                           <font>
-                              <Font size="24.0" />
+                              <Font name="System Bold Italic" size="24.0" />
                           </font>
                       </Label>
                       <TextField fx:id="signup_usename" layoutX="410.0" layoutY="605.0" prefHeight="30.0" prefWidth="220.0" promptText="Usename" rotate="-51.4" styleClass="textfield_signup" stylesheets="@login.css" />
@@ -97,6 +97,7 @@
                 </Button>
             <TextField fx:id="signup_address" layoutX="520.0" layoutY="432.0" prefHeight="26.0" prefWidth="220.0" promptText="Địa chỉ" styleClass="textfield" stylesheets="@login.css" />
             <DatePicker fx:id="signup_date" layoutX="520.0" layoutY="179.0" prefHeight="30.0" prefWidth="220.0" promptText="Day/Month/Year" showWeekNumbers="true" styleClass="textfield" stylesheets="@login.css" />
+            <TextField fx:id="signup_phone" layoutX="72.0" layoutY="432.0" prefHeight="26.0" prefWidth="220.0" promptText="Số điện thoại" styleClass="textfield_signup" stylesheets="@login.css" />
             </children>
         </AnchorPane>
     </children>
